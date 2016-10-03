@@ -1,0 +1,303 @@
+html {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-image: url("imagens/fundo.jpg");
+	background-repeat: repeat;
+	color: #46687f;
+	height: auto;
+}
+
+body {
+	-webkit-animation: bugfix infinite 1s;
+}
+
+@
+-webkit-keyframes bugfix {from { padding:0;
+	
+}
+
+to {
+	padding: 0;
+}
+
+}
+* {
+	margin: 0 auto;
+	padding: 0;
+	list-style-type: none;
+	text-decoration: none;
+	cursor: default;
+}
+
+a * {
+	cursor: pointer;
+}
+
+div.clear {
+	clear: both;
+}
+
+/* ---------------------------------------------- */
+/* IMAGENS */
+/* ---------------------------------------------- */
+nav img.menu-icone, img.login-icone {
+	width: 25px;
+	margin-right: 10px;
+	float: left;
+}
+
+nav ul.login-icone{
+	text-align: center; 
+}
+
+img.usuario-imagem {
+	width: 80px;
+	height: 80px;
+	margin-bottom: 10px;
+	margin-right: 15px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	float: left;
+}
+
+img.mensagens-retweet {
+	width: 25px;
+	height: 25px;
+	margin-top: 15px;
+}
+
+/* ---------------------------------------------- */
+/* INPUTS */
+/* ---------------------------------------------- */
+input[type="checkbox"], input[type="radio"] {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0;
+} 
+
+input[type="submit"], [type="button"]{ 
+	width: 120px;
+	margin: 15px;
+	padding: 5px;
+	font-size: 12px;
+	font-weight: bold;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px; 
+	color: #344e5f;
+	background-color: #ccdae3;
+	outline: none; 
+	cursor: pointer !important;
+	float: right;
+} 
+
+input[type="text"], [type="email"], [type="password"] {
+	height: 20px;
+	padding-left: 5px;
+	font-size: 12px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border-color: transparent;
+	outline: none; 
+	cursor: auto !important;
+}
+
+form input[type="file"] { 
+}
+ 
+form input[type="text"], [type="email"], [type="password"], [type="file"] {	
+	margin: 10px;
+} 
+
+form input[type="text"], [type="email"], [type="password"] {
+	height: 25px;
+	background-color: #efefef;
+}
+
+label.campo-form {
+    display: inline-block;
+    width: 150px;
+    text-align: right;
+}
+
+/* ---------------------------------------------- */
+/* HEADER */
+/* ---------------------------------------------- */
+header {
+	margin-bottom: 20px;
+	background-color: #afe2ff;
+	-webkit-box-shadow: 2px 2px 5px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow: 2px 2px 5px 0px rgba(50, 50, 50, 0.75);
+	box-shadow: 2px 2px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
+nav#menu-principal ul li {
+	display: inline-block;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	margin-left: 20px;
+	font-size: 13px;
+}
+
+nav#menu-principal ul a li {
+	display: inline-block;
+	padding: 2px 10px;
+	margin-bottom: 10px;
+	margin-left: 20px;
+	border-color: transparent;
+	border-style: solid;
+}
+
+nav#menu-principal ul a li:hover {
+	border-bottom: solid 3px #2883d9;
+}
+
+nav#menu-principal p {
+	float: left;
+}
+
+nav#menu-principal p.menu-titulo {
+	margin-top: 5px;
+}
+
+/* ---------------------------------------------- */
+/* CONTEUDO */
+/* ---------------------------------------------- */
+aside {
+	float: left;
+}
+
+section {
+	margin-bottom: 20px;
+	padding: 20px;
+	background-color: #f3f3f3;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border-style: solid;
+	border-color: #70caff;
+	border-width: 0.5px;
+	float: left;
+}
+/* ---------------------------------------------- */
+section#usuario {
+	width: calc(100% - 40px);
+}
+
+section#usuario .usuario-perfil {
+	width: 100%;
+	margin-bottom: 20px;
+	border-bottom: solid 1px #c0c0c0;
+	float: left;
+}
+
+section#usuario .usuario-perfil p {
+	font-weight: bold;
+	float: left;
+}
+
+section#usuario .usuario-numeros {
+	width: 30%;
+	float: left;
+}
+
+section#usuario .usuario-numeros p, section.seguidores .seguidores-info p
+	{
+	font-size: 12px;
+}
+/************************/
+section.seguidores {
+	width: calc(100% - 40px);
+}
+
+section.seguidores .seguidores-info {
+	width: 100%;
+	float: left;
+}
+
+section.seguidores .seguidores-info p {
+	float: left;
+}
+
+/************************/
+section .titulo {
+	margin-bottom: 20px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+article#container-conteudo, #container-login, #mensagens-conteudo{
+	margin-bottom: 20px;
+	padding: 10px;
+	font-size: 14px;
+	background-color: #FFF;
+	border: solid 1px;
+	border-color: #c0c0c0;
+}
+
+#container-login { 
+	width: calc(100% - 20px);
+	text-align:center;
+	float: left;
+}
+
+article#container-conteudo p, #mensagens-conteudo p {
+	margin-top: 10px;
+	float: left;
+} 
+
+/* ---------------------------------------------- */
+/* MOBILE */
+/* ---------------------------------------------- */
+@media All and (min-width: 240px) {
+	input[type="text"].menu-input-buscar {
+		width: 150px;
+	}
+	
+	section#container { 
+		width: calc(100% - 40px); 
+	}
+	
+	form input[type="text"], [type="email"], [type="password"] {
+		width: 90%;
+	}
+}
+
+@media All and (min-width: 320px) {
+	input[type="text"].menu-input-buscar {
+		width: 200px;
+	}
+}
+
+/* ---------------------------------------------- */
+/* DESKTOP */
+/* ---------------------------------------------- */
+@media All and (min-width: 960px) {
+	aside {
+		width: 30%;
+		margin-left: 20px;
+	}
+	
+	section#container {  
+		width: 90%;
+		width: calc(100% - 80px); 
+		margin-left: 20px;
+	} 
+	
+	section#mensagens {
+		width: 60%;
+		margin-left: 20px;
+	} 
+	
+	form input[type="text"], [type="email"], [type="password"] {
+		width: 40%;
+	}
+}
+
+@media All and (min-width: 1280px) { 	
+	section#mensagens {
+		width: 62%;
+	}
+}
