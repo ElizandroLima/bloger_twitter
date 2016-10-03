@@ -1,28 +1,20 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 
 <!DOCTYPE html> 
 <html lang="pt-br"> 
 	<head>
-	<!-- Corrigir a exibicao do fragmento -->
-		<jsp:include page="cabecalho.jspf" />
+		<%@ include file="cabecalho.jspf" %>
 	</head>
 
 	<!-- Não permite arrastar e soltar imagens -->
 	<body onContextMenu="return false" onDragStart="return false">
-		<!-- Cabeçalho -->
+		<!-- Cabeçalho --> 
 		<header> 	
-			<nav id="menu-principal">
-				<ul class="login-icone"> 
-					<li>
-						<img class="login-icone" src="./resources/css/imagens/icone_inicio.png" alt="Twitter" />
-					</li>
-				</ul> 					
-			</nav>	 
+			<%@ include file="nav_login.jspf" %>
 		</header>  
 		 
 		<!-- Conteúdo -->
-		<section id="container">	
+		<section id="container">	 
 			<p class="titulo">Acesse sua conta no Twitter</p> 
 						
 			<article id="container-login">
@@ -36,7 +28,7 @@
 						<sf:errors path="senha"></sf:errors>
 					</p>					
 					<p><input type="submit" value="Entrar"></p>
-					<p><a href="criar-conta.html"><input type="button" value="Inscreva-se"></a></p>
+					<p><a href="criar-conta.jsp"><input type="button" value="Inscreva-se"></a></p>
 				</sf:form>				
 			</article> 
 		</section>  	 

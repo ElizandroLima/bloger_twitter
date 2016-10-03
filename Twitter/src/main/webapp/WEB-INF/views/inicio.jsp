@@ -2,51 +2,15 @@
 
 <!DOCTYPE html> 
 <html lang="pt-br"> 
-	<head> 
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1"> 
-		<meta name="MobileOptimized" content="320">
-		<meta name="HandheldFriendly" content="True">
-		<meta name="description" content="Twitter">
-		<meta name="keywords" content="Twitter">
-		<meta http-equiv="refresh" content="300"> <!-- Auto-refresh -->
-		
-		<title>.:Twitter:.</title>
-		<link rel="icon" href="../css/imagens/icone_twitter.png" />	
-		<link rel="stylesheet" type="text/css" href="../css/estilo.css" />    
-	</head> 
+	<head>
+		<%@ include file="cabecalho.jspf" %>
+	</head>
 
 	<!-- Não permite arrastar e soltar imagens -->
 	<body onContextMenu="return false" onDragStart="return false">
 		<!-- Cabeçalho -->
 		<header> 	
-			<nav id="menu-principal">
-				<ul>
-					<a href="inicio.html">
-						<li>
-							<img class="menu-icone" src="../css/imagens/icone_inicio.png" alt="Início" />
-							<p class="menu-titulo">Início</p>
-						</li>
-					</a>
-					<a href="meu-perfil.html">
-						<li>
-							<img class="menu-icone" src="../css/imagens/icone_perfil.png" alt="Meu Perfil" />
-							<p class="menu-titulo">Meu Perfil</p>
-						</li>
-					</a>
-					<li>
-						<img class="menu-icone" src="../css/imagens/icone_buscar.png" alt="Buscar" />
-						<p><input class="menu-input-buscar" type="text" placeholder="Buscar" /></p>
-					</li>
-					<li>
-						<a href="alterar-conta.html"><img class="menu-icone" src="../css/imagens/icone_dados.png" alt="Alterar Meu Perfil" title="Alterar Meu Perfil" /></a>
-					</li>
-					<li>
-						<a href="novo-tweet.html"><img class="menu-icone" src="../css/imagens/icone_mensagem.png" alt="Novo Tweet" title="Novo Tweet" /></a>
-					</li>
-				</ul> 					
-			</nav>	 
+			<%@ include file="nav_inicio.jspf" %> 
 		</header>  
 		 
 		<!-- Conteúdo -->

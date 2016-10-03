@@ -29,13 +29,12 @@ public class LoginController {
 	// POST: cria o objeto login
 	@Transactional // Indica que este metodo sera usado pelo BD
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginAutenticar(@Valid Login login, Model modelo,
-	                BindingResult resultado) {
+	public String loginAutenticar(@Valid Login login, Model modelo, BindingResult resultado) {
 
 		if (resultado.hasErrors()) {
 			return "login-inicio";
 		}
 		// TODO Efetuar login repositorio
-		return "inicio";
+		return "redirect:inicio";
 	}
 }
