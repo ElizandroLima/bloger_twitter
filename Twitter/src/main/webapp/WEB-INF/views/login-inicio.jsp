@@ -28,7 +28,7 @@
 						<sf:errors path="senha"></sf:errors>
 					</p>					
 					<p><input type="submit" value="Entrar"></p>
-					<p><a href="criar-conta.jsp"><input type="button" value="Inscreva-se"></a></p>
+					<p><a href="criar-conta"><input type="button" value="Inscreva-se"></a></p>
 				</sf:form>				
 			</article> 
 		</section>  	 

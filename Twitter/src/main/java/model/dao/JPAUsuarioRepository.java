@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
 import model.Usuario;
 import model.repository.UsuarioRepository;
 
-@Repository
 @Primary
+@Repository
 public class JPAUsuarioRepository implements UsuarioRepository {
 	@PersistenceContext(name = "twitterPU")
 	private EntityManager em;
@@ -43,8 +43,12 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 
 	@Override
 	public Usuario obter(Usuario usuario) {
+		TypedQuery<Usuario> consulta = em.createQuery("SELECT u FROM Usuario u WHERE u.codigo = :codigo",
+		                Usuario.class);
 
-		return null;
+		// Parametros do WHERE
+		consulta.setParameter("codigo", usuario.getCodigo());
+		return consulta.getSingleResult();
 	}
 
 	@Override

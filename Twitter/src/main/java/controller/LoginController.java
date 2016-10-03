@@ -17,7 +17,7 @@ public class LoginController {
 	//private LoginRepository repositorio;
 
 	// GET: pega o formulário de criação
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String loginForm(Model modelo) {
 
 		Login login = new Login();
@@ -28,7 +28,7 @@ public class LoginController {
 
 	// POST: cria o objeto login
 	@Transactional // Indica que este metodo sera usado pelo BD
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String loginAutenticar(@Valid Login login, Model modelo, BindingResult resultado) {
 
 		if (resultado.hasErrors()) {

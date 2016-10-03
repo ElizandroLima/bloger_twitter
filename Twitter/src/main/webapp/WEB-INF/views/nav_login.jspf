@@ -1,7 +1,9 @@
 <nav id="menu-principal">
 	<ul class="login-icone"> 
 		<li>
-			<img class="login-icone" src="./resources/css/imagens/icone_inicio.png" alt="Twitter" />
+			<a href="login">
+				<img class="login-icone" src="./resources/css/imagens/icone_inicio.png" title="Twitter" alt="Twitter" />
+			</a>
 		</li>
 	</ul> 					
 </nav>	 

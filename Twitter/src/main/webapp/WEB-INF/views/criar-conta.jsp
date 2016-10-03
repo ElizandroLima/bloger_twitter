@@ -17,11 +17,25 @@
 						
 			<article id="container-login">
 				<sf:form modelAttribute="criarContaModelo">
-					<p><sf:input path="nome-usuario" type="text" name="nome-usuario" id="nome-usuario" placeholder="Nome de usuário" required="required" /></p>
-					<p><sf:input path="nome" type="text" name="nome" id="nome" placeholder="Nome completo" required="required" /></p>
-					<p><sf:input path="email" type="email" name="email" id="email" placeholder="Email" required="required" /></p>
-					<p><sf:input path="senha" type="password" name="senha" id="senha" placeholder="Senha" required="required" /></p>
-					<p><sf:input path="csenha" type="password" name="csenha" id="csenha" placeholder="Confirmar senha" required="required" /></p>
+					<p>
+						<sf:input path="nomeUsuario" type="text" name="nomeUsuario" id="nomeUsuario" placeholder="Nome de usuário" required="required" />
+						<sf:errors path="nomeUsuario"></sf:errors>
+					</p>
+					<p>
+						<sf:input path="nome" type="text" name="nome" id="nome" placeholder="Nome completo" required="required" />
+						<sf:errors path="nome"></sf:errors>
+					</p>
+					<p>
+						<sf:input path="email" type="email" name="email" id="email" placeholder="Email" required="required" />
+						<sf:errors path="email"></sf:errors>
+					</p>
+					<p>
+						<sf:input path="senha" type="password" name="senha" id="senha" placeholder="Senha" required="required" />
+						<sf:errors path="senha"></sf:errors>
+					</p>
+					<p>
+						<input type="password" name="csenha" id="csenha" placeholder="Confirmar senha" required="required" />
+					</p>
 					
 					<p><input type="submit" value="Inscreva-se"></p> 
 				</sf:form>				
