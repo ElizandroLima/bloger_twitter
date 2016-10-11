@@ -1,4 +1,4 @@
-package controller;
+package twitter;
 
 import javax.sql.DataSource;
 
@@ -22,12 +22,16 @@ public class TwitterApplication {
 	@Primary
 	@ConfigurationProperties(prefix = "datasource.twitter")
 	public DataSource siteDataSourceBean() {
-		return DataSourceBuilder.create().build();
+		return DataSourceBuilder.create()
+		                        .build();
 	}
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean siteEntityManagerFactoryBean(EntityManagerFactoryBuilder builder) {
 		// Pacotes que serão escaneados para as Entities
-		return builder.dataSource(siteDataSourceBean()).packages("controller").persistenceUnit("twitterPU").build();
+		return builder.dataSource(siteDataSourceBean())
+		              .packages("twitter")
+		              .persistenceUnit("twitterPU")
+		              .build();
 	}
 }

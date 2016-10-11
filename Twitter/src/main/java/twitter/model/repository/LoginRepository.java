@@ -1,6 +1,6 @@
-package model.repository;
+package twitter.model.repository;
 
-import model.Login;
+import twitter.model.Login;
 
 public interface LoginRepository {
 	boolean autenticar(Login login);

@@ -1,4 +1,4 @@
-package model.dao;
+package twitter.model.dao;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import javax.persistence.TypedQuery;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-import model.Usuario;
-import model.repository.UsuarioRepository;
+import twitter.model.Usuario;
+import twitter.model.repository.UsuarioRepository;
 
 @Primary
 @Repository

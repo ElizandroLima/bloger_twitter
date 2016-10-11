@@ -1,4 +1,4 @@
-package controller;
+package twitter.controller;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -9,12 +9,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import model.Login;
+import twitter.model.Login;
 
 @Controller
 public class LoginController {
-	//@Autowired // Injeção de dependência utilizando interface
-	//private LoginRepository repositorio;
+	/*
+	 * @Autowired private LoginRepository repositorio;
+	 */
 
 	// GET: pega o formulário de criação
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -32,9 +33,9 @@ public class LoginController {
 	public String loginAutenticar(@Valid Login login, Model modelo, BindingResult resultado) {
 
 		if (resultado.hasErrors()) {
-			return "login-inicio";
+			return "redirect:/";
 		}
 		// TODO Efetuar login repositorio
-		return "redirect:inicio";
+		return "inicio";
 	}
 }

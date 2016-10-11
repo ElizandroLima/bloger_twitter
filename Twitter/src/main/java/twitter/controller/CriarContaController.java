@@ -1,23 +1,19 @@
-package controller;
+package twitter.controller;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import model.Usuario;
-import model.repository.UsuarioRepository;
+import twitter.model.Usuario;
+import twitter.model.repository.UsuarioRepository;
 
 @Controller
-@Configuration
-@ComponentScan("model.*")
 public class CriarContaController {
 	// Injeção de objeto UsuarioRepository dentro desse atributo, dispensando o new (instanciação)
 	@Autowired
@@ -41,6 +37,6 @@ public class CriarContaController {
 		}
 		// Persiste o objeto no BD
 		repositorio.inserir(usuario);
-		return "redirect:login-inicio";
+		return "inicio";
 	}
 }

@@ -1,8 +1,8 @@
-package model.repository;
+package twitter.model.repository;
 
 import java.util.List;
 
-import model.Usuario;
+import twitter.model.Usuario;
 
 public interface UsuarioRepository {
 	boolean inserir(Usuario usuario);

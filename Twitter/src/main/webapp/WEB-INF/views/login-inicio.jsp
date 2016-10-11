@@ -1,4 +1,4 @@
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <!DOCTYPE html> 
 <html lang="pt-br"> 
@@ -18,18 +18,16 @@
 			<p class="titulo">Acesse sua conta no Twitter</p> 
 						
 			<article id="container-login">
-				<sf:form modelAttribute="loginModelo">
+				<form:form servletRelativeAction="/login">
 					<p>
-						<sf:input path="email" type="email" name="email" id="email" placeholder="Email" required="required" />
-						<sf:errors path="email"></sf:errors>
+						<input type="email" name="username" placeholder="Email" required="required" /> 
 					</p>
 					<p>
-						<sf:input path="senha" type="password" name="senha" id="senha" placeholder="Senha" required="required" />
-						<sf:errors path="senha"></sf:errors>
+						<input type="password" name="password" placeholder="Senha" required="required" /> 
 					</p>					
 					<p><input type="submit" value="Entrar"></p>
 					<p><a href="criar-conta"><input type="button" value="Inscreva-se"></a></p>
-				</sf:form>				
+				</form:form>				
 			</article> 
 		</section>  	 
 	</body>
