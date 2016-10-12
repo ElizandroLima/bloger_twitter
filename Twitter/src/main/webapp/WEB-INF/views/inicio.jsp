@@ -17,7 +17,7 @@
 		<aside id="info">
 			<section id="usuario">
 				<div class="usuario-perfil">
-					<img class="usuario-imagem" src="../css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
+					<img class="usuario-imagem" src="./resources/css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
 					<p>Bianca de Lima</p>
 				</div>
 				<div class="usuario-numeros">
@@ -38,12 +38,12 @@
 			<section class="seguidores">
 				<p class="titulo">Seguindo</p> 
 				<div class="seguidores-info">
-					<img class="usuario-imagem" src="../css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
+					<img class="usuario-imagem" src="./resources/css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
 					<p>Carlos Alberto</p>
 				</div>				
 				<div class="clear"></div>
 				<div class="seguidores-info">
-					<img class="usuario-imagem" src="../css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
+					<img class="usuario-imagem" src="./resources/css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
 					<p>Carlos Alberto</p>
 				</div>			 
 			</section>			
@@ -53,7 +53,7 @@
 			<section class="seguidores">
 				<p class="titulo">Seguidores</p> 
 				<div class="seguidores-info">
-					<img class="usuario-imagem" src="../css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
+					<img class="usuario-imagem" src="./resources/css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
 					<p>Ana Maria</p>
 				</div>				
 				<div class="clear"></div> 			 
@@ -64,7 +64,7 @@
 						
 			<article id="mensagens-conteudo">
 				<header>					
-					<img class="usuario-imagem" src="../css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
+					<img class="usuario-imagem" src="./resources/css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
 					<p>Carlos Alberto</p>
 				</header>
 				<div class="clear"></div>
@@ -72,7 +72,7 @@
 				<div class="clear"></div>
 				<footer>	
 					<a href="#">
-						<img class="mensagens-retweet" src="../css/imagens/icone_retweet.png" alt="Retwittar" title="Retwittar" />
+						<img class="mensagens-retweet" src="./resources/css/imagens/icone_retweet.png" alt="Retwittar" title="Retwittar" />
 					</a>			
 				</footer>
 			</article>
@@ -80,7 +80,7 @@
 			
 			<article id="mensagens-conteudo">
 				<header>					
-					<img class="usuario-imagem" src="../css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
+					<img class="usuario-imagem" src="./resources/css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
 					<p>Carlos Alberto</p>
 				</header>
 				<div class="clear"></div>
@@ -88,7 +88,7 @@
 				<div class="clear"></div>
 				<footer>	
 					<a href="#">
-						<img class="mensagens-retweet" src="../css/imagens/icone_retweet.png" alt="Retwittar" title="Retwittar" />
+						<img class="mensagens-retweet" src="./resources/css/imagens/icone_retweet.png" alt="Retwittar" title="Retwittar" />
 					</a>			
 				</footer>
 			</article>

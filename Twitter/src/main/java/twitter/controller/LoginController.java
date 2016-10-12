@@ -9,7 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import twitter.model.Login;
+import twitter.modelview.UsuarioModelView;
 
 @Controller
 public class LoginController {
@@ -21,7 +21,7 @@ public class LoginController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String loginForm(Model modelo) {
 
-		Login login = new Login();
+		UsuarioModelView login = new UsuarioModelView();
 		modelo.addAttribute("loginModelo", login);
 
 		return "login-inicio";
@@ -30,12 +30,12 @@ public class LoginController {
 	// POST: cria o objeto login
 	@Transactional // Indica que este metodo sera usado pelo BD
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String loginAutenticar(@Valid Login login, Model modelo, BindingResult resultado) {
+	public String loginAutenticar(@Valid UsuarioModelView login, Model modelo, BindingResult resultado) {
 
 		if (resultado.hasErrors()) {
-			return "redirect:/";
+			return "/";
 		}
 		// TODO Efetuar login repositorio
-		return "inicio";
+		return "redirect:/inicio";
 	}
 }

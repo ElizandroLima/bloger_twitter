@@ -20,35 +20,59 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 
 	@Override
 	public boolean inserir(Usuario usuario) {
+		TypedQuery<Usuario> consulta;
 
 		try {
-			// TODO verificar se o nome de usuario/email já existe antes de inserir no BD
-			em.persist(usuario);
-			return true;
+			// Verifica se o nome de usuário já existe antes de inserir no BD
+			consulta = em.createQuery("SELECT u FROM Usuario u WHERE u.nomeUsuario = :nomeUsuario", Usuario.class);
+			consulta.setParameter("nomeUsuario", usuario.getNomeUsuario());
+
+			if (consulta.getResultList()
+			            .isEmpty()) {
+				em.persist(usuario);
+				return true;
+			}
+			System.err.println(">> JPA: Este usuário já existe no sistema!");
+		} catch (IllegalArgumentException erro) {
+			System.err.println(">> JPA: Argumento de pesquisa inválido!\n" + erro);
 		} catch (Exception erro) {
-			System.err.println(">> JPA: Falha ao inserir!");
-			return false;
+			System.err.println(">> JPA: Falha ao inserir!\n" + erro);
+		} finally {
+			em.close();
 		}
+		return false;
 	}
 
 	@Override
 	public boolean alterar(Usuario usuario) {
-		return false;
+		em.merge(usuario);
+		return true;
 	}
 
 	@Override
 	public boolean excluir(Usuario usuario) {
-		return false;
+		// TODO Verificar se o usuário existe na lista para removê-lo
+		em.remove(usuario);
+		return true;
 	}
 
 	@Override
-	public Usuario obter(Usuario usuario) {
-		TypedQuery<Usuario> consulta = em.createQuery("SELECT u FROM Usuario u WHERE u.codigo = :codigo",
-		                Usuario.class);
+	public Usuario obter(int codigo) {
+		Usuario usuario;
 
-		// Parametros do WHERE
-		consulta.setParameter("codigo", usuario.getCodigo());
-		return consulta.getSingleResult();
+		try {
+			// Consulta um usuário pelo seu código
+			usuario = em.find(Usuario.class, codigo);
+			return usuario;
+
+		} catch (IllegalArgumentException erro) {
+			System.err.println(">> JPA: Argumento de pesquisa inválido!\n" + erro);
+		} catch (Exception erro) {
+			System.err.println(">> JPA: Falha ao buscar!\n" + erro);
+		} finally {
+			em.close();
+		}
+		return null;
 	}
 
 	@Override

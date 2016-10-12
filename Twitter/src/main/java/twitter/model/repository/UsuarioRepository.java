@@ -11,7 +11,7 @@ public interface UsuarioRepository {
 
 	boolean excluir(Usuario usuario);
 
-	Usuario obter(Usuario usuario);
+	Usuario obter(int codigo);
 
 	List<Usuario> obterTodos();
 }

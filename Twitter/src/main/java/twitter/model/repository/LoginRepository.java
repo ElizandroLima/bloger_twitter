@@ -1,7 +1,7 @@
 package twitter.model.repository;
 
-import twitter.model.Login;
+import twitter.modelview.UsuarioModelView;
 
 public interface LoginRepository {
-	boolean autenticar(Login login);
+	boolean autenticar(UsuarioModelView login);
 }

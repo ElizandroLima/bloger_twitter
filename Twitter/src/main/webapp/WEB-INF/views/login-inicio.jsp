@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <!DOCTYPE html> 
@@ -6,21 +8,21 @@
 		<%@ include file="cabecalho.jspf" %>
 	</head>
 
-	<!-- Não permite arrastar e soltar imagens -->
+	<!-- NÃ£o permite arrastar e soltar imagens -->
 	<body onContextMenu="return false" onDragStart="return false">
-		<!-- Cabeçalho --> 
+		<!-- CabeÃ§alho --> 
 		<header> 	
 			<%@ include file="nav_login.jspf" %>
 		</header>  
 		 
-		<!-- Conteúdo -->
+		<!-- ConteÃºdo -->
 		<section id="container">	 
 			<p class="titulo">Acesse sua conta no Twitter</p> 
 						
 			<article id="container-login">
-				<form:form servletRelativeAction="/login">
+				<form:form servletRelativeAction="/">
 					<p>
-						<input type="email" name="username" placeholder="Email" required="required" /> 
+						<input type="text" name="username" placeholder="Nome de usuÃ¡rio" required="required" /> 
 					</p>
 					<p>
 						<input type="password" name="password" placeholder="Senha" required="required" /> 

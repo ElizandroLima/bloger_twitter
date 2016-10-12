@@ -1,4 +1,5 @@
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html> 
 <html lang="pt-br"> 
@@ -16,29 +17,31 @@
 			<p class="titulo">Crie uma conta no Twitter</p> 
 						
 			<article id="container-login">
-				<sf:form modelAttribute="criarContaModelo">
+				<form:errors path="*" />
+				<form:form modelAttribute="criarContaModelo">
+					<p><form:errors path="usuario.nomeUsuario"></form:errors></p>
 					<p>
-						<sf:input path="nomeUsuario" type="text" name="nomeUsuario" id="nomeUsuario" placeholder="Nome de usu�rio" required="required" />
-						<sf:errors path="nomeUsuario"></sf:errors>
+						<form:input path="usuario.nomeUsuario" type="text" placeholder="Nome de usuário" required="required" />
+					</p>
+					<p><form:errors path="usuario.nome"></form:errors></p>
+					<p>
+						<form:input path="usuario.nome" type="text" placeholder="Nome completo" required="required" />
+					</p>
+					<p><form:errors path="usuario.email"></form:errors></p>
+					<p>
+						<form:input path="usuario.email" type="email" placeholder="Email" required="required" />
+					</p>
+					<p><form:errors path="usuario.senha"></form:errors></p>
+					<p>
+						<form:input path="usuario.senha" type="password" placeholder="Senha" required="required" />
 					</p>
 					<p>
-						<sf:input path="nome" type="text" name="nome" id="nome" placeholder="Nome completo" required="required" />
-						<sf:errors path="nome"></sf:errors>
+						<input type="password" name="confirmacaoSenha" id="confirmacaoSenha" placeholder="Confirmar senha" required="required" />
 					</p>
-					<p>
-						<sf:input path="email" type="email" name="email" id="email" placeholder="Email" required="required" />
-						<sf:errors path="email"></sf:errors>
-					</p>
-					<p>
-						<sf:input path="senha" type="password" name="senha" id="senha" placeholder="Senha" required="required" />
-						<sf:errors path="senha"></sf:errors>
-					</p>
-					<p>
-						<input type="password" name="csenha" id="csenha" placeholder="Confirmar senha" required="required" />
-					</p>
+					<p><i>* O nome de usuário não poderá ser alterado mais tarde!</i></p>
 					
-					<p><input type="submit" value="Inscreva-se"></p> 
-				</sf:form>				
+					<p><input type="submit" value="Criar conta" /></p> 
+				</form:form>				
 			</article> 
 		</section>  	 
 	</body>
