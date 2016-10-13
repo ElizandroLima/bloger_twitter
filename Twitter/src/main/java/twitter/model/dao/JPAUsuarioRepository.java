@@ -27,6 +27,7 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 			consulta = em.createQuery("SELECT u FROM Usuario u WHERE u.nomeUsuario = :nomeUsuario", Usuario.class);
 			consulta.setParameter("nomeUsuario", usuario.getNomeUsuario());
 
+			// Se a consulta não retornar resultados, então insere o usuário no BD
 			if (consulta.getResultList()
 			            .isEmpty()) {
 				em.persist(usuario);
@@ -45,15 +46,46 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 
 	@Override
 	public boolean alterar(Usuario usuario) {
-		em.merge(usuario);
-		return true;
+		Usuario usuarioBD;
+
+		try {
+			usuarioBD = this.obter(usuario.getCodigo());
+			usuarioBD.setNome(usuario.getNome());
+			usuarioBD.setEmail(usuario.getEmail());
+			usuarioBD.setSenha(usuario.getSenha());
+			usuarioBD.setImagem(usuario.getImagem());
+			em.merge(usuarioBD);
+
+			return true;
+
+		} catch (IllegalArgumentException erro) {
+			System.err.println(">> JPA: O objeto não é uma entidade!\n" + erro);
+		} catch (Exception erro) {
+			System.err.println(">> JPA: Falha ao alterar!\n" + erro);
+		} finally {
+			em.close();
+		}
+		return false;
 	}
 
 	@Override
-	public boolean excluir(Usuario usuario) {
-		// TODO Verificar se o usuário existe na lista para removê-lo
-		em.remove(usuario);
-		return true;
+	public boolean excluir(int codigo) {
+		Usuario usuarioBD;
+
+		try {
+			usuarioBD = this.obter(codigo);
+			em.remove(usuarioBD);
+
+			return true;
+
+		} catch (IllegalArgumentException erro) {
+			System.err.println(">> JPA: O objeto não é uma entidade!\n" + erro);
+		} catch (Exception erro) {
+			System.err.println(">> JPA: Falha ao alterar!\n" + erro);
+		} finally {
+			em.close();
+		}
+		return false;
 	}
 
 	@Override

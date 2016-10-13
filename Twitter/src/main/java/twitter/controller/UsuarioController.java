@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import twitter.model.Usuario;
 import twitter.model.repository.UsuarioRepository;
 import twitter.modelview.UsuarioModelView;
 import twitter.modelview.UsuarioModelViewValidator;
@@ -28,6 +29,9 @@ public class UsuarioController {
 		binder.addValidators(new UsuarioModelViewValidator());
 	}
 
+	// --------------------------------
+	// CRIAÇÃO DE CONTA
+	//---------------------------------
 	@RequestMapping(value = "/criar-conta", method = RequestMethod.GET)
 	public String criarContaForm(Model modelo) {
 
@@ -43,7 +47,7 @@ public class UsuarioController {
 	                BindingResult resultado) {
 
 		if (resultado.hasErrors()) {
-			System.err.println(">> VALIDAÇÃO: Os campos contém dados inválidos!");
+			System.err.println(">> VALIDAÇÃO: Os campos contêm dados inválidos!");
 			return "criar-conta";
 		}
 
@@ -55,5 +59,48 @@ public class UsuarioController {
 			return "redirect:/inicio";
 		}
 		return "criar-conta";
+	}
+
+	// --------------------------------
+	// ALTERAÇÃO DE CONTA
+	//---------------------------------
+	@RequestMapping(value = "/alterar-conta", method = RequestMethod.GET)
+	public String alterarContaForm(Model modelo) {
+		UsuarioModelView usuariomv = new UsuarioModelView();
+
+		try {
+			// TODO Recuperar da sessão o código do usuário correspondente /alterar-conta/{codigo} e @PathVariable
+			// Recupera as informações do usuário via BD para preencher o formulário
+			Usuario usuario = repositorio.obter(1);
+			usuariomv.setUsuario(usuario);
+
+		} catch (NullPointerException erro) {
+			System.err.println(">> USUÁRIO: Usuário não encontrado!");
+		} catch (Exception erro) {
+			System.err.println(">> USUÁRIO: Falha ao recuperar dados do usuário!");
+		}
+
+		modelo.addAttribute("alterarContaModelo", usuariomv);
+		return "alterar-conta";
+	}
+
+	@Transactional
+	@RequestMapping(value = "/alterar-conta", method = RequestMethod.POST)
+	public String alterarContaValidar(@Valid @ModelAttribute("alterarContaModelo") UsuarioModelView usuario,
+	                BindingResult resultado) {
+
+		if (resultado.hasErrors()) {
+			System.err.println(">> VALIDAÇÃO: Os campos contêm dados inválidos!");
+			return "alterar-conta";
+		}
+
+		// Insere o usuário no BD através de JPA + Spring
+		if (repositorio.alterar(usuario.getUsuario())) {
+			System.out.println(">> VALIDAÇÃO: Usuário alterado com sucesso: " + usuario.getUsuario()
+			                                                                           .getNomeUsuario());
+
+			return "redirect:/inicio";
+		}
+		return "alterar-conta";
 	}
 }

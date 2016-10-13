@@ -35,6 +35,7 @@
 					<p>
 						<form:input path="usuario.senha" type="password" placeholder="Senha" required="required" />
 					</p>
+					<p><form:errors path="confirmacaoSenha"></form:errors></p>
 					<p>
 						<input type="password" name="confirmacaoSenha" id="confirmacaoSenha" placeholder="Confirmar senha" required="required" />
 					</p>

@@ -13,10 +13,10 @@ import twitter.modelview.UsuarioModelView;
 
 @Controller
 public class LoginController {
-	/*
-	 * @Autowired private LoginRepository repositorio;
-	 */
 
+	// --------------------------------
+	// LOGIN
+	//---------------------------------
 	// GET: pega o formulário de criação
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String loginForm(Model modelo) {
@@ -37,5 +37,13 @@ public class LoginController {
 		}
 		// TODO Efetuar login repositorio
 		return "redirect:/inicio";
+	}
+
+	// --------------------------------
+	// LOGOUT
+	//---------------------------------
+	@RequestMapping("/logout")
+	public String logout() {
+		return "logout";
 	}
 }

@@ -1,12 +1,12 @@
 <nav id="menu-principal">
 	<ul>
-		<a href="inicio.jsp">
+		<a href="inicio">
 			<li>
 				<img class="menu-icone" src="./resources/css/imagens/icone_inicio.png" alt="Início" />
 				<p class="menu-titulo">Início</p>
 			</li>
 		</a>
-		<a href="meu-perfil.jsp">
+		<a href="meu-perfil">
 			<li>
 				<img class="menu-icone" src="./resources/css/imagens/icone_perfil.png" alt="Meu Perfil" />
 				<p class="menu-titulo">Meu Perfil</p>
@@ -17,10 +17,10 @@
 			<p><input class="menu-input-buscar" type="text" placeholder="Buscar" /></p>
 		</li>
 		<li>
-			<a href="alterar-conta.html"><img class="menu-icone" src="./resources/css/imagens/icone_dados.png" alt="Alterar Meu Perfil" title="Alterar Meu Perfil" /></a>
+			<a href="alterar-conta"><img class="menu-icone" src="./resources/css/imagens/icone_dados.png" alt="Alterar Meu Perfil" title="Alterar Meu Perfil" /></a>
 		</li>
 		<li>
-			<a href="novo-tweet.html"><img class="menu-icone" src="./resources/css/imagens/icone_mensagem.png" alt="Novo Tweet" title="Novo Tweet" /></a>
+			<a href="novo-tweet"><img class="menu-icone" src="./resources/css/imagens/icone_mensagem.png" alt="Novo Tweet" title="Novo Tweet" /></a>
 		</li>
 	</ul> 					
 </nav>	 

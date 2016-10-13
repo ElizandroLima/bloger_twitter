@@ -28,6 +28,8 @@ public class Usuario {
 	@Size(min = 6, message = "O tamanho mínimo da senha é de 6 caracteres!")
 	private String senha;
 
+	private String imagem;
+
 	public Usuario() {}
 
 	public int getCodigo() {
@@ -64,5 +66,13 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 }

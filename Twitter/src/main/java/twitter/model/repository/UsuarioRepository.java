@@ -9,7 +9,7 @@ public interface UsuarioRepository {
 
 	boolean alterar(Usuario usuario);
 
-	boolean excluir(Usuario usuario);
+	boolean excluir(int codigo);
 
 	Usuario obter(int codigo);
 

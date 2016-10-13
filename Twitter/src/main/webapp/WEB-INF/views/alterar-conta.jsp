@@ -1,48 +1,50 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html> 
 <html lang="pt-br"> 
 	<head>
 		<%@ include file="cabecalho.jspf" %>
 	</head>
 
-	<!-- Não permite arrastar e soltar imagens -->
 	<body onContextMenu="return false" onDragStart="return false">
-		<!-- Cabeçalho -->
 		<header> 	
 			<%@ include file="nav_inicio.jspf" %>
 		</header>  
 		 
-		<!-- Conteúdo -->		
 		<section id="container">	
 			<p class="titulo">Alterar meus dados pessoais</p> 
 						
 			<article id="container-login">
-				<form action="#" method="POST" enctype="multipart/form-data">
+				<form:errors path="*" />
+				<form:form modelAttribute="alterarContaModelo" enctype="multipart/form-data"> 
+					<p><form:errors path="usuario.nome"></form:errors></p>
 					<p>
-						<label for="nome-usuario" class="campo-form">Nome de usuário:</label>
-						<input type="text" name="nome-usuario" id="nome-usuario" required="required" disabled="disabled" />
+						<form:label path="usuario.nome" class="campo-form">Nome completo:</form:label>
+						<form:input path="usuario.nome" type="text" required="required" />
 					</p>
+					<p><form:errors path="usuario.email"></form:errors></p>
 					<p>
-						<label for="nome" class="campo-form">Nome completo:</label>
-						<input type="text" name="nome" id="nome" required="required" />
+						<form:label path="usuario.email" class="campo-form">Email:</form:label>
+						<form:input path="usuario.email" type="email" required="required" />
 					</p>
+					<p><form:errors path="usuario.senha"></form:errors></p>
 					<p>
-						<label for="email" class="campo-form">Email:</label>
-						<input type="email" name="email" id="email" required="required" />
+						<form:label path="usuario.senha" class="campo-form">Alterar senha:</form:label>
+						<form:input path="usuario.senha" type="password" required="required" />
 					</p>
+					<p><form:errors path="confirmacaoSenha"></form:errors></p>
 					<p>
-						<label for="senha" class="campo-form">Alterar senha:</label>
-						<input type="password" name="senha" id="senha" required="required" />
+						<label for="confirmacaoSenha" class="campo-form">Confirme sua senha:</label>
+						<input type="password" name="confirmacaoSenha" id="confirmacaoSenha" required="required" />
 					</p>
+					<p><form:errors path="usuario.imagem"></form:errors></p>
 					<p>
-						<label for="csenha" class="campo-form">Confirme sua senha:</label>
-						<input type="password" name="csenha" id="csenha" required="required" />
+						<form:label path="usuario.imagem" class="campo-form">Foto:</form:label>
+						<form:input path="usuario.imagem" type="file" accept="image/*" />
 					</p>
-					<p>
-						<label for="imagem" class="campo-form">Foto:</label>
-						<input type="file" name="imagem" id=imagem accept="image/*">
-					</p>
-					<p><input type="submit" value="Inscreva-se"></p> 
-				</form>				
+					<p><input type="submit" value="Alterar conta"></p> 
+				</form:form>				
 			</article> 
 		</section>  		 
 	</body>
