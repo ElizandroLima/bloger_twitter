@@ -104,7 +104,17 @@ input[type="text"], [type="email"], [type="password"] {
 	cursor: auto !important;
 }
 
-form input[type="file"] { 
+textarea { 
+	padding: 10px;
+	font-size: 13px;
+	font-style: italic;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border-color: transparent;	
+	background-color: #efefef;
+	outline: none; 
+	cursor: auto !important;
 }
  
 form input[type="text"], [type="email"], [type="password"], [type="file"] {	
