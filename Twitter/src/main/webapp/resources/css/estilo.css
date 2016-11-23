@@ -10,16 +10,11 @@ body {
 	-webkit-animation: bugfix infinite 1s;
 }
 
-@
--webkit-keyframes bugfix {from { padding:0;
-	
+@-webkit-keyframes bugfix {
+	from { padding: 0; }
+	to { padding: 0; }
 }
 
-to {
-	padding: 0;
-}
-
-}
 * {
 	margin: 0 auto;
 	padding: 0;
@@ -28,7 +23,7 @@ to {
 	cursor: default;
 }
 
-a * {
+a *, p * {
 	cursor: pointer;
 }
 

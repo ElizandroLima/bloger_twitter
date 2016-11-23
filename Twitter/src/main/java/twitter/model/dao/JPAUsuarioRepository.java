@@ -20,6 +20,7 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 
 	@Override
 	public boolean inserir(Usuario usuario) {
+		// Consulta tipada para indicar que será retornado um objeto Usuário da consulta
 		TypedQuery<Usuario> consulta;
 
 		try {
@@ -34,6 +35,7 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 				return true;
 			}
 			System.err.println(">> JPA: Este usuário já existe no sistema!");
+
 		} catch (IllegalArgumentException erro) {
 			System.err.println(">> JPA: Argumento de pesquisa inválido!\n" + erro);
 		} catch (Exception erro) {
@@ -49,7 +51,9 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 		Usuario usuarioBD;
 
 		try {
+			// Obtém os dados do usuário pelo código para atualizar
 			usuarioBD = this.obter(usuario.getCodigo());
+
 			usuarioBD.setNome(usuario.getNome());
 			usuarioBD.setEmail(usuario.getEmail());
 			usuarioBD.setSenha(usuario.getSenha());
@@ -59,7 +63,7 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 			return true;
 
 		} catch (IllegalArgumentException erro) {
-			System.err.println(">> JPA: O objeto não é uma entidade!\n" + erro);
+			System.err.println(">> JPA: O objeto não é uma tabela do BD!\n" + erro);
 		} catch (Exception erro) {
 			System.err.println(">> JPA: Falha ao alterar!\n" + erro);
 		} finally {
@@ -111,6 +115,7 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 	public List<Usuario> obterTodos() {
 		// Retorna o objeto do tipo Usuario
 		TypedQuery<Usuario> consulta = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
+
 		return consulta.getResultList();
 	}
 }
