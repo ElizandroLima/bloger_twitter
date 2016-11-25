@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -22,6 +23,7 @@ public class Usuario {
 	private String nome;
 
 	@NotEmpty(message = "Email não pode ser vazio!")
+	@Email(message = "Deve estar no formato correto de email!")
 	private String email;
 
 	@NotEmpty(message = "Senha não pode ser vazia!")

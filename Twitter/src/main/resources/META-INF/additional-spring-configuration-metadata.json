@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "datasource.twitter.url",
+    "type": "java.lang.String",
+    "description": "Localhost que hospedará o site."
+  },
+  {
+    "name": "datasource.twitter.username",
+    "type": "java.lang.String",
+    "description": "Usuário do banco de dados."
+  },
+  {
+    "name": "datasource.twitter.password",
+    "type": "java.lang.String",
+    "description": "Senha do banco de dados."
+  },
+  {
+    "name": "datasource.twitter.driverClassName",
+    "type": "java.lang.String",
+    "description": "Driver MySQL ou outro para integrar o Java com o banco de dados escolhido."
+  }
+]}

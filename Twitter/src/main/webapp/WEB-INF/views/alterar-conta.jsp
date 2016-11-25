@@ -4,7 +4,7 @@
 <!DOCTYPE html> 
 <html lang="pt-br"> 
 	<head>
-		<%@ include file="cabecalho.jspf" %>
+		<%@ include file="cabecalho.jspf" %> 
 	</head>
 
 	<body onContextMenu="return false" onDragStart="return false">
@@ -17,7 +17,12 @@
 						
 			<article id="container-login">
 				<form:errors path="*" />
-				<form:form modelAttribute="alterarContaModelo" enctype="multipart/form-data"> 
+				<form:form id="formAlterarConta" modelAttribute="alterarContaModelo" enctype="multipart/form-data"> 
+					<p><form:errors path="usuario.nomeUsuario"></form:errors></p>
+					<p>
+						<form:label path="usuario.nomeUsuario" class="campo-form">Nome de usuário:</form:label>
+						<form:input path="usuario.nomeUsuario" type="text" readonly="true" />
+					</p>
 					<p><form:errors path="usuario.nome"></form:errors></p>
 					<p>
 						<form:label path="usuario.nome" class="campo-form">Nome completo:</form:label>
@@ -40,8 +45,9 @@
 					</p>
 					<p><form:errors path="usuario.imagem"></form:errors></p>
 					<p>
-						<form:label path="usuario.imagem" class="campo-form">Foto:</form:label>
-						<form:input path="usuario.imagem" type="file" accept="image/*" />
+						<form:input path="usuario.imagem" type="hidden" value="" />
+						<label for="imagem" class="campo-form">Foto:</label>
+						<input id="imagem" name="imagem" type="file" accept="image/*" />
 					</p>
 					<p><input type="submit" value="Alterar conta"></p> 
 				</form:form>				
