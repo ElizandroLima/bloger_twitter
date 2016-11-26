@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
+import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -30,6 +31,8 @@ public class UsuarioController {
 	// Injeção do objeto UsuarioRepository dentro desse atributo, dispensando o new (instanciação)
 	@Autowired
 	private UsuarioRepository repositorio;
+	@Autowired
+	private ServletContext contexto;
 
 	// Inicia a validação do usuário
 	@InitBinder
@@ -97,45 +100,20 @@ public class UsuarioController {
 	public String alterarContaValidar(@Valid @ModelAttribute("alterarContaModelo") UsuarioModelView usuariomv,
 	                BindingResult resultado, @RequestParam("imagem") MultipartFile arquivo) {
 
-		String raiz, nomeArquivo;
-		File diretorio, arquivoServidor;
-		BufferedOutputStream stream;
-
-		// Imagem 
-		try {
-			// Cria o caminho para salvar o arquivo (deve ter permissão de escrita)
-			nomeArquivo = arquivo.getOriginalFilename();
-
-			raiz = System.getProperty("catalina.base");
-			diretorio = new File(raiz + File.separator + "uploads");
-
-			// Cria o diretório caso não exista
-			if (!diretorio.exists()) {
-				diretorio.mkdirs();
-			}
-
-			// Salva o arquivo no servidor
-			arquivoServidor = new File(diretorio.getAbsolutePath() + File.separator + nomeArquivo);
-			stream = new BufferedOutputStream(new FileOutputStream(arquivoServidor));
-			stream.write(arquivo.getBytes());
-			stream.close();
-
-			// Altera o campo no usuariomv
-			usuariomv.getUsuario()
-			         .setImagem(nomeArquivo);
-
-		} catch (FileNotFoundException erro) {
-			resultado.rejectValue("usuario.imagem", "", "Arquivo não encontrado!");
-
-		} catch (Exception erro) {
-			resultado.rejectValue("usuario.imagem", "", "Falha ao carregar imagem!");
-		}
-
 		// Efetua a validação do formulário
 		if (resultado.hasErrors()) {
 			resultado.rejectValue("usuario.imagem", "", "Os campos contêm dados inválidos!");
 
 			return "alterar-conta";
+		}
+
+		// Imagem 
+		if (!arquivo.isEmpty()) {
+			String imagem = salvarImagem(arquivo, resultado);
+
+			// Altera o campo no usuariomv
+			usuariomv.getUsuario()
+			         .setImagem(imagem);
 		}
 
 		// Insere o usuário no BD
@@ -146,5 +124,36 @@ public class UsuarioController {
 			return "redirect:/meu-perfil";
 		}
 		return "alterar-conta";
+	}
+
+	public String salvarImagem(MultipartFile arquivo, BindingResult resultado) {
+		String nomeArquivo, nomeArquivoCompleto, diretorio;
+		File caminho;
+		BufferedOutputStream stream;
+
+		try {
+			// Cria o caminho para salvar o arquivo (deve ter permissão de escrita)
+			nomeArquivoCompleto = arquivo.getOriginalFilename();
+
+			// Recupera somente o nome do arquivo, descartando o caminho completo
+			nomeArquivo = nomeArquivoCompleto.substring(nomeArquivoCompleto.lastIndexOf("\\") + 1,
+			                nomeArquivoCompleto.length());
+
+			diretorio = contexto.getRealPath("resources/uploads");
+
+			// Salva o arquivo no servidor
+			caminho = new File(diretorio + File.separator + nomeArquivo);
+			stream = new BufferedOutputStream(new FileOutputStream(caminho));
+			stream.write(arquivo.getBytes());
+			stream.close();
+
+			return nomeArquivo;
+
+		} catch (FileNotFoundException erro) {
+			resultado.rejectValue("usuario.imagem", "", "Arquivo não encontrado!");
+		} catch (Exception erro) {
+			resultado.rejectValue("usuario.imagem", "", "Falha ao carregar imagem!");
+		}
+		return "";
 	}
 }

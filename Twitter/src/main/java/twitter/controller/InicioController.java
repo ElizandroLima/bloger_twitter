@@ -19,6 +19,25 @@ public class InicioController {
 	//--------------------------------
 	@RequestMapping(value = "/inicio")
 	public String inicio(Model modelo) {
+		// TODO Pegar o código da sessão adicionado ao efetuar login
+		try {
+			Usuario usuario = repositorio.obter(2);
+			modelo.addAttribute("usuarioModelo", usuario);
+
+			/*
+			 * Mensagem mensagem = repositorio.obter(codigoSessao);
+			 * modelo.addAttribute("mensagemModelo", mensagem);
+			 */
+			/*
+			 * Seguidor seguidor = repositorio.obter(codigoSessao);
+			 * modelo.addAttribute("seguidorModelo", seguidor);
+			 */
+
+		} catch (NullPointerException erro) {
+			System.err.println(">> USUÁRIO: Usuário não encontrado!");
+		} catch (Exception erro) {
+			System.err.println(">> USUÁRIO: Falha ao recuperar dados do usuário!");
+		}
 		return "inicio";
 	}
 

@@ -17,7 +17,8 @@
 						
 			<article id="container-login">
 				<form:errors path="*" />
-				<form:form id="formAlterarConta" modelAttribute="alterarContaModelo" enctype="multipart/form-data"> 
+				<form:form modelAttribute="alterarContaModelo" enctype="multipart/form-data"> 
+					<p><form:input path="usuario.codigo" type="hidden" /></p>
 					<p><form:errors path="usuario.nomeUsuario"></form:errors></p>
 					<p>
 						<form:label path="usuario.nomeUsuario" class="campo-form">Nome de usuário:</form:label>
@@ -43,12 +44,12 @@
 						<label for="confirmacaoSenha" class="campo-form">Confirme sua senha:</label>
 						<input type="password" name="confirmacaoSenha" id="confirmacaoSenha" required="required" />
 					</p>
-					<p><form:errors path="usuario.imagem"></form:errors></p>
 					<p>
-						<form:input path="usuario.imagem" type="hidden" value="" />
 						<label for="imagem" class="campo-form">Foto:</label>
 						<input id="imagem" name="imagem" type="file" accept="image/*" />
-					</p>
+					</p>					
+					<p><form:errors path="usuario.imagem"></form:errors></p>
+					
 					<p><input type="submit" value="Alterar conta"></p> 
 				</form:form>				
 			</article> 

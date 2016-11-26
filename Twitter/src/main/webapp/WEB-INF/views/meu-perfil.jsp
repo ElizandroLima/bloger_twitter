@@ -18,7 +18,7 @@
 		<aside id="info">
 			<section id="usuario">
 				<div class="usuario-perfil">
-					<img class="usuario-imagem" src="./resources/css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
+					<img class="usuario-imagem" src="./resources/uploads/${usuarioModelo.imagem}" alt="Foto do Perfil" />
 					<p>${usuarioModelo.nome}</p>
 				</div>
 				<div class="usuario-numeros">
@@ -39,12 +39,12 @@
 			<section class="seguidores">
 				<p class="titulo">Seguindo</p> 
 				<div class="seguidores-info">
-					<img class="usuario-imagem" src="./resources/css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
+					<img class="usuario-imagem" src="./resources/uploads/${usuarioModelo.imagem}" alt="Foto do Perfil" />
 					<p>Carlos Alberto</p>
 				</div>				
 				<div class="clear"></div>
 				<div class="seguidores-info">
-					<img class="usuario-imagem" src="./resources/css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
+					<img class="usuario-imagem" src="./resources/uploads/${usuarioModelo.imagem}" alt="Foto do Perfil" />
 					<p>Carlos Alberto</p>
 				</div>			 
 			</section>			
@@ -54,7 +54,7 @@
 			<section class="seguidores">
 				<p class="titulo">Seguidores</p> 
 				<div class="seguidores-info">
-					<img class="usuario-imagem" src="./resources/css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
+					<img class="usuario-imagem" src="./resources/uploads/${usuarioModelo.imagem}" alt="Foto do Perfil" />
 					<p>Ana Maria</p>
 				</div>				
 				<div class="clear"></div> 			 
@@ -66,34 +66,14 @@
 						
 			<article id="mensagens-conteudo">
 				<header>					
-					<img class="usuario-imagem" src="./resources/css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
+					<img class="usuario-imagem" src="./resources/uploads/${usuarioModelo.imagem}" alt="Foto do Perfil" />
 					<p>Carlos Alberto</p>
 				</header>
 				<div class="clear"></div>
 				<p class="mensagens-texto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et lacinia diam, sit amet interdum neque. Donec a nisi nec dui semper hendrerit. Nunc eu porttitor elit, sed scelerisque nunc. Duis pulvinar sapien in turpis cursus maximus. Proin dapibus sollicitudin rhoncus. Nulla viverra ullamcorper ullamcorper. Suspendisse tincidunt accumsan facilisis.</p>				
-				<div class="clear"></div>
-				<footer>	
-					<a href="#">
-						<img class="mensagens-retweet" src="./resources/css/imagens/icone_retweet.png" alt="Retwittar" title="Retwittar" />
-					</a>			
-				</footer>
+				<div class="clear"></div> 
 			</article>
-			<div class="clear"></div>
-			
-			<article id="mensagens-conteudo">
-				<header>					
-					<img class="usuario-imagem" src="./resources/css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
-					<p>Carlos Alberto</p>
-				</header>
-				<div class="clear"></div>
-				<p class="mensagens-texto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>				
-				<div class="clear"></div>
-				<footer>	
-					<a href="#">
-						<img class="mensagens-retweet" src="./resources/css/imagens/icone_retweet.png" alt="Retwittar" title="Retwittar" />
-					</a>			
-				</footer>
-			</article>
+			<div class="clear"></div>  
 		</section>  	 
 	</body>
 </html>

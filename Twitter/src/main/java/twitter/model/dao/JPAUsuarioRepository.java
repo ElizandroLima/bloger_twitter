@@ -57,9 +57,13 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 			usuarioBD.setNome(usuario.getNome());
 			usuarioBD.setEmail(usuario.getEmail());
 			usuarioBD.setSenha(usuario.getSenha());
-			usuarioBD.setImagem(usuario.getImagem());
-			em.merge(usuarioBD);
 
+			// Verifica se a imagem foi alterada pelo usuário antes de salvar no BD
+			if (usuario.getImagem() != null) {
+				usuarioBD.setImagem(usuario.getImagem());
+			}
+
+			em.merge(usuarioBD);
 			return true;
 
 		} catch (IllegalArgumentException erro) {
