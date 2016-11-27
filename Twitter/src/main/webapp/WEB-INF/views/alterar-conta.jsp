@@ -19,6 +19,7 @@
 				<form:errors path="*" />
 				<form:form modelAttribute="alterarContaModelo" enctype="multipart/form-data"> 
 					<p><form:input path="usuario.codigo" type="hidden" /></p>
+					
 					<p><form:errors path="usuario.nomeUsuario"></form:errors></p>
 					<p>
 						<form:label path="usuario.nomeUsuario" class="campo-form">Nome de usuário:</form:label>
@@ -46,13 +47,13 @@
 					</p>
 					<p>
 						<label for="imagem" class="campo-form">Foto:</label>
-						<input id="imagem" name="imagem" type="file" accept="image/*" />
+						<input name="imagem" id="imagem" type="file" accept="image/*" />
 					</p>					
 					<p><form:errors path="usuario.imagem"></form:errors></p>
 					
 					<p><input type="submit" value="Alterar conta"></p> 
 				</form:form>				
 			</article> 
-		</section>  		 
+		</section>  		  
 	</body>
 </html>

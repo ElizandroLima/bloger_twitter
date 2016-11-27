@@ -102,7 +102,7 @@ public class UsuarioController {
 
 		// Efetua a validação do formulário
 		if (resultado.hasErrors()) {
-			resultado.rejectValue("usuario.imagem", "", "Os campos contêm dados inválidos!");
+			resultado.rejectValue("usuario.nomeUsuario", "", "Os campos contêm dados inválidos!");
 
 			return "alterar-conta";
 		}
@@ -118,17 +118,17 @@ public class UsuarioController {
 
 		// Insere o usuário no BD
 		if (repositorio.alterar(usuariomv.getUsuario())) {
-			System.out.println(">> VALIDAÇÃO: Usuário alterado com sucesso: " + usuariomv.getUsuario()
-			                                                                             .getNomeUsuario());
-			resultado.rejectValue("usuario.nomeUsuario", "", "Usuário alterado com sucesso!");
-			return "redirect:/meu-perfil";
+			resultado.rejectValue("usuario.nomeUsuario", "", usuariomv.getUsuario()
+			                                                          .getNome()
+			                + ", você alterou com sucesso seu perfil!");
+			return "alterar-conta";
 		}
 		return "alterar-conta";
 	}
 
 	public String salvarImagem(MultipartFile arquivo, BindingResult resultado) {
-		String nomeArquivo, nomeArquivoCompleto, diretorio;
-		File caminho;
+		String nomeArquivo, nomeArquivoCompleto, raiz;
+		File diretorio, caminho;
 		BufferedOutputStream stream;
 
 		try {
@@ -139,12 +139,20 @@ public class UsuarioController {
 			nomeArquivo = nomeArquivoCompleto.substring(nomeArquivoCompleto.lastIndexOf("\\") + 1,
 			                nomeArquivoCompleto.length());
 
-			diretorio = contexto.getRealPath("resources/uploads");
+			// Recupera o caminho da aplicação 
+			raiz = contexto.getRealPath("resources");
+			diretorio = new File(raiz + File.separator + "uploads");
+
+			// Cria o diretório caso não exista
+			if (!diretorio.exists()) {
+				diretorio.mkdirs();
+			}
 
 			// Salva o arquivo no servidor
 			caminho = new File(diretorio + File.separator + nomeArquivo);
 			stream = new BufferedOutputStream(new FileOutputStream(caminho));
 			stream.write(arquivo.getBytes());
+			stream.flush();
 			stream.close();
 
 			return nomeArquivo;

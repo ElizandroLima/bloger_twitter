@@ -6,7 +6,6 @@
 	<groupId>twitter</groupId>
 	<artifactId>Twitter</artifactId>
 	<version>1.0</version>
-	<packaging>war</packaging>
 
 	<name>Twitter</name>
 	<description>Projeto Twitter</description>
@@ -117,4 +116,5 @@
 			</plugin>
 		</plugins>
 	</build>
+	<packaging>war</packaging>
 </project>

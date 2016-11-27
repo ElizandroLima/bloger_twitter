@@ -38,6 +38,10 @@ public class Usuario {
 		return codigo;
 	}
 
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+
 	public String getNomeUsuario() {
 		return nomeUsuario;
 	}
