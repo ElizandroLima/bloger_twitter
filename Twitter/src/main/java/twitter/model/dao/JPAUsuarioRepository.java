@@ -3,6 +3,7 @@ package twitter.model.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -19,20 +20,20 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 	private EntityManager em;
 
 	@Override
-	public boolean inserir(Usuario usuario) {
-		// Consulta tipada para indicar que será retornado um objeto Usuário da consulta
+	public void inserir(Usuario usuario) {
+		// Consulta tipada para indicar que será retornado um objeto Usuário da
+		// consulta
 		TypedQuery<Usuario> consulta;
 
 		try {
 			// Verifica se o nome de usuário já existe antes de inserir no BD
-			consulta = em.createQuery("SELECT u FROM Usuario u WHERE u.nomeUsuario = :nomeUsuario", Usuario.class);
-			consulta.setParameter("nomeUsuario", usuario.getNomeUsuario());
+			consulta = em.createQuery("SELECT u FROM Usuario u WHERE u.username = :username", Usuario.class);
+			consulta.setParameter("username", usuario.getUsername());
 
-			// Se a consulta não retornar resultados, então insere o usuário no BD
-			if (consulta.getResultList()
-			            .isEmpty()) {
+			// Se a consulta não retornar resultados, então insere o usuário no
+			// BD
+			if (consulta.getResultList().isEmpty()) {
 				em.persist(usuario);
-				return true;
 			}
 			System.err.println(">> JPA: Este usuário já existe no sistema!");
 
@@ -43,7 +44,6 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 		} finally {
 			em.close();
 		}
-		return false;
 	}
 
 	@Override
@@ -56,9 +56,10 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 
 			usuarioBD.setNome(usuario.getNome());
 			usuarioBD.setEmail(usuario.getEmail());
-			usuarioBD.setSenha(usuario.getSenha());
+			usuarioBD.setPassword(usuario.getPassword());
 
-			// Verifica se a imagem foi alterada pelo usuário antes de salvar no BD
+			// Verifica se a imagem foi alterada pelo usuário antes de salvar no
+			// BD
 			if (usuario.getImagem() != null) {
 				usuarioBD.setImagem(usuario.getImagem());
 			}
@@ -121,5 +122,21 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 		TypedQuery<Usuario> consulta = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
 
 		return consulta.getResultList();
+	}
+
+	@Override
+	public Usuario buscarUsuarioPorUsername(String username) {
+		String jql = "Select u from Usuario u WHERE u.username LIKE :username";
+
+		Usuario usuario;
+		try {
+			usuario = em.createQuery(jql, Usuario.class).setParameter("username", username).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+
+		System.out.println(usuario.getNome());
+		System.out.println(usuario.getUsername());
+		return usuario;
 	}
 }

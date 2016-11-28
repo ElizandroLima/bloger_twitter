@@ -1,38 +1,77 @@
 package twitter.model;
 
+import java.util.Collection;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.persistence.JoinColumn;
+import java.util.Set;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario implements UserDetails {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
 
 	@NotEmpty(message = "Nome de usuário não pode ser vazio!")
-	private String nomeUsuario;
+	@Column(unique=true)
+	private String username;
 
 	@NotEmpty(message = "Nome não pode ser vazio!")
 	private String nome;
 
 	@NotEmpty(message = "Email não pode ser vazio!")
 	@Email(message = "Deve estar no formato correto de email!")
+	@Column(unique=true)
 	private String email;
 
 	@NotEmpty(message = "Senha não pode ser vazia!")
 	@Size(min = 6, message = "O tamanho mínimo da senha é de 6 caracteres!")
-	private String senha;
+	private String password;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "codigo", referencedColumnName = "codigo"), inverseJoinColumns = @JoinColumn(name = "perfil", referencedColumnName = "nome"))
+	private Set<Perfil> papeis;
 
 	private String imagem;
 
-	public Usuario() {}
+
+	public Usuario(int codigo, String username, String nome, String email, String password, Set<Perfil> papeis,
+			String imagem) {
+		super();
+		this.codigo = codigo;
+		this.username = username;
+		this.nome = nome;
+		this.email = email;
+		this.password = password;
+		this.papeis = papeis;
+		this.imagem = imagem;
+	}
+
+	public Usuario() {
+		super();
+		
+	}
+
 
 	public int getCodigo() {
 		return codigo;
@@ -42,12 +81,13 @@ public class Usuario {
 		this.codigo = codigo;
 	}
 
-	public String getNomeUsuario() {
-		return nomeUsuario;
+	@Override
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getNome() {
@@ -66,12 +106,13 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public String getSenha() {
-		return senha;
+	@Override
+	public String getPassword() {
+		return password;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getImagem() {
@@ -81,4 +122,44 @@ public class Usuario {
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
+
+	public Set<Perfil> getPapeis() {
+		return papeis;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return papeis;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User [codigo=" + codigo + ", username=" + username + ", password=" + password + "]";
+	}
+
 }

@@ -23,7 +23,7 @@
 			<a href="novo-tweet"><img class="menu-icone" src="./resources/css/imagens/icone_mensagem.png" alt="Novo Tweet" title="Novo Tweet" /></a>
 		</li>
 		<li>
-			<a href="#"><img class="menu-icone" src="./resources/css/imagens/icone_logout.png" alt="Encerrar Sessão" title="Encerrar Sessão" /></a>
+			<a href="/logout"><img class="menu-icone" src="./resources/css/imagens/icone_logout.png" alt="Encerrar Sessão" title="Encerrar Sessão" /></a>
 		</li>
 	</ul> 					
 </nav>	 

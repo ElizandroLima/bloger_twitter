@@ -5,7 +5,7 @@ import java.util.List;
 import twitter.model.Usuario;
 
 public interface UsuarioRepository {
-	boolean inserir(Usuario usuario);
+	void inserir(Usuario usuario);
 
 	boolean alterar(Usuario usuario);
 
@@ -14,4 +14,6 @@ public interface UsuarioRepository {
 	Usuario obter(int codigo);
 
 	List<Usuario> obterTodos();
+
+	Usuario buscarUsuarioPorUsername(String username);
 }

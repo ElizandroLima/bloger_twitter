@@ -10,11 +10,10 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,67 +22,60 @@ import org.springframework.web.multipart.MultipartFile;
 
 import twitter.model.Usuario;
 import twitter.model.repository.UsuarioRepository;
-import twitter.modelview.UsuarioModelView;
-import twitter.modelview.UsuarioModelViewValidator;
+import twitter.model.repository.UsuarioServiceRepository;
 
 @Controller
 public class UsuarioController {
-	// Injeção do objeto UsuarioRepository dentro desse atributo, dispensando o new (instanciação)
+	// Injeção do objeto UsuarioRepository dentro desse atributo, dispensando o
+	// new (instanciação)
 	@Autowired
 	private UsuarioRepository repositorio;
 	@Autowired
 	private ServletContext contexto;
+	@Autowired
+	private UsuarioServiceRepository service;
 
-	// Inicia a validação do usuário
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		binder.addValidators(new UsuarioModelViewValidator());
-	}
-
+	/*
+	 * // Inicia a validação do usuário
+	 * 
+	 * @InitBinder protected void initBinder(WebDataBinder binder) {
+	 * binder.addValidators(new UsuarioValidator()); }
+	 */
 	// --------------------------------
 	// CRIAÇÃO DE CONTA
-	//---------------------------------
-	@RequestMapping(value = "/criar-conta", method = RequestMethod.GET)
-	public String criarContaForm(Model modelo) {
-
-		UsuarioModelView usuario = new UsuarioModelView();
-		modelo.addAttribute("criarContaModelo", usuario);
-
+	// ---------------------------------
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String novoUsuario(Model model, Authentication auth) {
+		if (auth != null)
+			return "redirect:/meu-perfil";
+		model.addAttribute("criarContaModelo", new Usuario());
 		return "criar-conta";
 	}
 
-	@Transactional // Indica que este método sera usado pelo BD
-	@RequestMapping(value = "/criar-conta", method = RequestMethod.POST)
-	public String criarContaValidar(@Valid @ModelAttribute("criarContaModelo") UsuarioModelView usuariomv,
-	                BindingResult resultado) {
-
-		if (resultado.hasErrors()) {
-			System.err.println(">> VALIDAÇÃO: Os campos contêm dados inválidos!");
+	@Transactional
+	@RequestMapping(value = "/", method = RequestMethod.POST)
+	public String novo(@Valid Usuario usuario, BindingResult result, Model model) {
+		if (result.hasFieldErrors()) {
+			model.addAttribute("criarContaModelo", usuario);
 			return "criar-conta";
 		}
-
-		// Insere o usuário no BD através de JPA + Spring
-		if (repositorio.inserir(usuariomv.getUsuario())) {
-			System.out.println(">> VALIDAÇÃO: Usuário inserido com sucesso: " + usuariomv.getUsuario()
-			                                                                             .getNomeUsuario());
-			return "redirect:/";
-		}
-
-		resultado.rejectValue("usuario.nomeUsuario", "", "Este nome de usuário já existe no sistema!");
-		return "criar-conta";
+		service.cadastrarUsuario(usuario);
+		System.out.println(usuario);
+		return "redirect:/login";
 	}
 
 	// --------------------------------
 	// ALTERAÇÃO DE CONTA
-	//---------------------------------
+	// ---------------------------------
 	@RequestMapping(value = "/alterar-conta", method = RequestMethod.GET)
 	public String alterarContaForm(Model modelo) {
-		UsuarioModelView usuariomv = new UsuarioModelView();
+		// Usuario usuario = new Usuario();
 
 		try {
-			// TODO Recuperar da sessão o código do usuário correspondente /alterar-conta/{codigo} e @PathVariable
+			// TODO Recuperar da sessão o código do usuário correspondente
+			// /alterar-conta/{codigo} e @PathVariable
 			Usuario usuario = repositorio.obter(2);
-			usuariomv.setUsuario(usuario);
+			modelo.addAttribute("alterarContaModelo", usuario);
 
 		} catch (NullPointerException erro) {
 			System.err.println(">> USUÁRIO: Usuário não encontrado!");
@@ -91,14 +83,13 @@ public class UsuarioController {
 			System.err.println(">> USUÁRIO: Falha ao recuperar dados do usuário!");
 		}
 
-		modelo.addAttribute("alterarContaModelo", usuariomv);
 		return "alterar-conta";
 	}
 
 	@Transactional
 	@RequestMapping(value = "/alterar-conta", method = RequestMethod.POST)
-	public String alterarContaValidar(@Valid @ModelAttribute("alterarContaModelo") UsuarioModelView usuariomv,
-	                BindingResult resultado, @RequestParam("imagem") MultipartFile arquivo) {
+	public String alterarContaValidar(@Valid @ModelAttribute("alterarContaModelo") Usuario usuario,
+			BindingResult resultado, @RequestParam("imagem") MultipartFile arquivo) {
 
 		// Efetua a validação do formulário
 		if (resultado.hasErrors()) {
@@ -107,20 +98,18 @@ public class UsuarioController {
 			return "alterar-conta";
 		}
 
-		// Imagem 
+		// Imagem
 		if (!arquivo.isEmpty()) {
 			String imagem = salvarImagem(arquivo, resultado);
 
-			// Altera o campo no usuariomv
-			usuariomv.getUsuario()
-			         .setImagem(imagem);
+			// Altera o campo no usuario
+			usuario.setImagem(imagem);
 		}
 
 		// Insere o usuário no BD
-		if (repositorio.alterar(usuariomv.getUsuario())) {
-			resultado.rejectValue("usuario.nomeUsuario", "", usuariomv.getUsuario()
-			                                                          .getNome()
-			                + ", você alterou com sucesso seu perfil!");
+		if (repositorio.alterar(usuario)) {
+			resultado.rejectValue("usuario.nomeUsuario", "",
+					usuario.getNome() + ", você alterou com sucesso seu perfil!");
 			return "alterar-conta";
 		}
 		return "alterar-conta";
@@ -132,14 +121,16 @@ public class UsuarioController {
 		BufferedOutputStream stream;
 
 		try {
-			// Cria o caminho para salvar o arquivo (deve ter permissão de escrita)
+			// Cria o caminho para salvar o arquivo (deve ter permissão de
+			// escrita)
 			nomeArquivoCompleto = arquivo.getOriginalFilename();
 
-			// Recupera somente o nome do arquivo, descartando o caminho completo
+			// Recupera somente o nome do arquivo, descartando o caminho
+			// completo
 			nomeArquivo = nomeArquivoCompleto.substring(nomeArquivoCompleto.lastIndexOf("\\") + 1,
-			                nomeArquivoCompleto.length());
+					nomeArquivoCompleto.length());
 
-			// Recupera o caminho da aplicação 
+			// Recupera o caminho da aplicação
 			raiz = contexto.getRealPath("resources");
 			diretorio = new File(raiz + File.separator + "uploads");
 

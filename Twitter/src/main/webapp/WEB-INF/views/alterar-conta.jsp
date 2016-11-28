@@ -40,11 +40,6 @@
 						<form:label path="usuario.senha" class="campo-form">Alterar senha:</form:label>
 						<form:input path="usuario.senha" type="password" required="required" />
 					</p>
-					<p><form:errors path="confirmacaoSenha"></form:errors></p>
-					<p>
-						<label for="confirmacaoSenha" class="campo-form">Confirme sua senha:</label>
-						<input type="password" name="confirmacaoSenha" id="confirmacaoSenha" required="required" />
-					</p>
 					<p>
 						<label for="imagem" class="campo-form">Foto:</label>
 						<input name="imagem" id="imagem" type="file" accept="image/*" />

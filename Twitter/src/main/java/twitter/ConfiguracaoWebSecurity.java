@@ -1,5 +1,5 @@
 package twitter;
-/*
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,35 +14,36 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class ConfiguracaoWebSecurity extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private UserDetailsService usuarioService;
+	private UserDetailsService uds;
 
 	@Override
 	public void configure(AuthenticationManagerBuilder builder) throws Exception {
-		builder.userDetailsService(usuarioService)
-		       .passwordEncoder(new BCryptPasswordEncoder());
+		builder.userDetailsService(uds)
+		    .passwordEncoder(new BCryptPasswordEncoder());
+		//builder.userDetailsService(uds);
 	}
 
+
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-		    .antMatchers("/")
-		    .permitAll()
-		    .antMatchers("/criar-conta")
-		    .hasRole("admin")
-		    .anyRequest()
-		    .authenticated()
-		    .and()
+	protected void configure(HttpSecurity http) throws Exception{
+		http.authorizeRequests()		 
+				 .antMatchers("/resources/**").permitAll()
+				 .antMatchers("/").permitAll()
+				 //.antMatchers("/login-inicio").permitAll()
+				 .anyRequest().authenticated()
+				 .and()
 		    .formLogin()
-		    .loginPage("/")
-		    .permitAll()
-		    .and()
+		    	 .loginPage("/login")
+		    	 .permitAll()
+		    	 .and()
 		    .logout()
-		    .permitAll()
-		    .and()
+		   		 .permitAll()
+		         .and()
 		    .exceptionHandling()
-		    .accessDeniedPage("/acesso-negado")
-		    .and()
-		    .csrf()
-		    .disable();
+		    	 .accessDeniedPage("/acesso-negado")
+		    	 .and()
+            .csrf()
+            	 .disable();
 	}
-}*/
+}
+

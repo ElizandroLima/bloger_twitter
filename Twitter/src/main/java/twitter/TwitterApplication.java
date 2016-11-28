@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 @SpringBootApplication
@@ -19,7 +18,6 @@ public class TwitterApplication {
 	}
 
 	@Bean
-	@Primary
 	@ConfigurationProperties(prefix = "datasource.twitter")
 	public DataSource siteDataSourceBean() {
 		return DataSourceBuilder.create()

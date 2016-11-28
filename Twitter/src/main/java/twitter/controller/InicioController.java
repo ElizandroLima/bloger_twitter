@@ -1,6 +1,7 @@
 package twitter.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +15,16 @@ public class InicioController {
 	@Autowired
 	private UsuarioRepository repositorio;
 
-	//--------------------------------
+	@RequestMapping(value = "/meu-perfil", method = RequestMethod.GET)
+	public String inicio(Model model, Authentication auth) {
+		Usuario usuario = (Usuario) auth.getPrincipal();
+		model.addAttribute("usuario", usuario);
+		return "/meu-perfil";
+	}
+
+	// --------------------------------
 	// EXIBIR DADOS DOS USUÁRIOS
-	//--------------------------------
+	// --------------------------------
 	@RequestMapping(value = "/inicio")
 	public String inicio(Model modelo) {
 		// TODO Pegar o código da sessão adicionado ao efetuar login
@@ -41,9 +49,9 @@ public class InicioController {
 		return "inicio";
 	}
 
-	//--------------------------------
+	// --------------------------------
 	// EXIBIR MEUS DADOS
-	//--------------------------------
+	// --------------------------------
 	@RequestMapping(value = "/meu-perfil")
 	public String meuPerfil(Model modelo) {
 
@@ -69,15 +77,15 @@ public class InicioController {
 		return "meu-perfil";
 	}
 
-	//--------------------------------
+	// --------------------------------
 	// TWEETS
-	//--------------------------------
+	// --------------------------------
 	@RequestMapping(value = "/novo-tweet", method = RequestMethod.GET)
 	public String novoTweetForm(Model modelo) {
 
 		// TODO Modificar o UsuarioModelView para a classe Mensagem
-		//UsuarioModelView usuario = new UsuarioModelView();
-		//modelo.addAttribute("novoTweetModelo", usuario);
+		// UsuarioModelView usuario = new UsuarioModelView();
+		// modelo.addAttribute("novoTweetModelo", usuario);
 
 		return "novo-tweet";
 	}
@@ -86,8 +94,8 @@ public class InicioController {
 	public String novoTweetValidar() {
 
 		// TODO Modificar o UsuarioModelView para a classe Mensagem
-		//UsuarioModelView usuario = new UsuarioModelView();
-		//modelo.addAttribute("novoTweetModelo", usuario);
+		// UsuarioModelView usuario = new UsuarioModelView();
+		// modelo.addAttribute("novoTweetModelo", usuario);
 
 		return "novo-tweet";
 	}

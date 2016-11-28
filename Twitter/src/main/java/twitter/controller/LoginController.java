@@ -1,49 +1,46 @@
 package twitter.controller;
 
-import javax.transaction.Transactional;
-import javax.validation.Valid;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import twitter.modelview.UsuarioModelView;
 
 @Controller
 public class LoginController {
 
 	// --------------------------------
 	// LOGIN
-	//---------------------------------
+	// ---------------------------------
 	// GET: pega o formulário de criação
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String loginForm(Model modelo) {
-
-		UsuarioModelView login = new UsuarioModelView();
-		modelo.addAttribute("loginModelo", login);
-
-		return "login-inicio";
-	}
-
-	// POST: cria o objeto login
-	@Transactional // Indica que este metodo sera usado pelo BD
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String loginAutenticar(@Valid UsuarioModelView login, Model modelo, BindingResult resultado) {
-
-		if (resultado.hasErrors()) {
-			return "/";
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Model model, Authentication auth) {
+		System.out.println("Não Logou!");
+		//System.out.println(auth.isAuthenticated());
+		//System.out.println(auth.getName());
+		
+		if (auth != null) {
+			System.out.println("Logou!");
+			return "redirect:/meu-perfil";
+			//return "redirect:/time-line";
 		}
-		// TODO Efetuar login repositorio
-		return "redirect:/inicio";
+		return "/login";
 	}
 
 	// --------------------------------
 	// LOGOUT
-	//---------------------------------
-	@RequestMapping("/logout")
-	public String logout() {
-		return "logout";
+	// ---------------------------------
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpServletRequest request, HttpServletResponse response, Authentication auth) {
+
+		if (auth != null)
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		return "redirect:/";
 	}
+
 }
