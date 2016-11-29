@@ -4,5 +4,5 @@ import twitter.model.Usuario;
 
 public interface UsuarioServiceRepository {
 
-	void cadastrarUsuario(Usuario usuario);
+	boolean cadastrarUsuario(Usuario usuario);
 }

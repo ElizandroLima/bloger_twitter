@@ -10,36 +10,26 @@ import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 
-
 @Entity
-@Table(name="perfil")
-public class Perfil implements GrantedAuthority{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+@Table(name = "perfil")
+public class Perfil implements GrantedAuthority {
 
-	/**
-	 * 
-	 */
-	
-	
+	private static final long serialVersionUID = 1L;
 	public static final String NORMAL_USER = "normal-user";
 
 	@Id
 	@Column
 	private String nome;
-	
-	@ManyToMany(mappedBy="papeis")
+
+	@ManyToMany(mappedBy = "papeis")
 	private Set<Usuario> user;
-	
+
 	public Perfil() {}
-	
-	public Perfil(String nome){
+
+	public Perfil(String nome) {
 		this.nome = nome;
 	}
-	
+
 	@Override
 	public String getAuthority() {
 		return nome;

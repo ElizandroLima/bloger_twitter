@@ -13,43 +13,24 @@
 		<header> 	
 			<%@ include file="nav_inicio.jspf" %> 
 		</header>  
-		 
-		<!-- Conteúdo -->
-		<aside id="info">
-			<section id="usuario">
-				<div class="usuario-perfil">
-					<img class="usuario-imagem" src="./resources/css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
-					<p>TESTE</p>
-				</div>
-				<div class="usuario-numeros">
-					<p>18.524</p>
-					<p>Tweets</p>
-				</div>
-				<div class="usuario-numeros">
-					<p>1.004</p>
-					<p>Seguindo</p>
-				</div>
-				<div class="usuario-numeros">
-					<p>4.541</p>
-					<p>Seguidores</p>
-				</div>				
-			</section>
-		</aside>	
 					
 		<section id="mensagens">	
 			<p class="titulo">Busca de Amigos</p> 
-			<!-- Inicio do for -->		
+			<c:forEach items="${retornoPesquisa}" var="u">
 			<article id="mensagens-conteudo">
 				<header>					
-					<img class="usuario-imagem" src="css/imagens/imagem_perfil.png" alt="Foto do Perfil" />
-					<p>
-						<a href="#">Carlos Alberto</a>
-					</p>
+					<img class="usuario-imagem" src="./resources/uploads/${u.imagem}" alt="Foto do Perfil" />
+					<form action="perfil-usuario" method="GET">
+						<p>
+							<input style="display: none;" type="text" name="codigoUsuario" value="${u.codigo}">
+							<a href="perfil-usuario?codigoUsuario=${u.codigo}">${u.nome}</a>
+						</p>
+					</form> 
 				</header>
 				<div class="clear"></div>
 			</article> 
 			<div class="clear"></div>
-			<!-- Fim do for -->
+			</c:forEach>
 		</section>  
 	</body>
 </html>

@@ -15,20 +15,14 @@ public class InicioController {
 	@Autowired
 	private UsuarioRepository repositorio;
 
-	@RequestMapping(value = "/meu-perfil", method = RequestMethod.GET)
-	public String inicio(Model model, Authentication auth) {
-		Usuario usuario = (Usuario) auth.getPrincipal();
-		model.addAttribute("usuario", usuario);
-		return "/meu-perfil";
-	}
-
 	// --------------------------------
 	// EXIBIR DADOS DOS USUÁRIOS
 	// --------------------------------
-	@RequestMapping(value = "/inicio")
-	public String inicio(Model modelo) {
+	@RequestMapping(value = "/inicio", method = RequestMethod.GET)
+	public String inicio(Model modelo, Authentication auth) {
 		// TODO Pegar o código da sessão adicionado ao efetuar login
 		try {
+			//Usuario usuario = (Usuario) auth.getPrincipal();
 			Usuario usuario = repositorio.obter(2);
 			modelo.addAttribute("usuarioModelo", usuario);
 
@@ -52,11 +46,12 @@ public class InicioController {
 	// --------------------------------
 	// EXIBIR MEUS DADOS
 	// --------------------------------
-	@RequestMapping(value = "/meu-perfil")
-	public String meuPerfil(Model modelo) {
+	@RequestMapping(value = "/meu-perfil", method = RequestMethod.GET)
+	public String meuPerfil(Model modelo, Authentication auth) {
 
 		// TODO Pegar o código da sessão adicionado ao efetuar login
 		try {
+			//Usuario usuario = (Usuario) auth.getPrincipal();
 			Usuario usuario = repositorio.obter(2);
 			modelo.addAttribute("usuarioModelo", usuario);
 

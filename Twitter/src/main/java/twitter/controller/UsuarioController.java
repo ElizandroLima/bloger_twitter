@@ -26,18 +26,19 @@ import twitter.model.repository.UsuarioServiceRepository;
 
 @Controller
 public class UsuarioController {
-	// Injeção do objeto UsuarioRepository dentro desse atributo, dispensando o
-	// new (instanciação)
+	// Injeção do objeto UsuarioRepository dentro desse atributo, dispensando o new (instanciação)
 	@Autowired
 	private UsuarioRepository repositorio;
 	@Autowired
 	private ServletContext contexto;
 	@Autowired
 	private UsuarioServiceRepository service;
+	private final String NOME_USUARIO = "username";
+	private final String EMAIL = "email";
+	private final String IMAGEM = "imagemPerfil";
 
 	/*
 	 * // Inicia a validação do usuário
-	 * 
 	 * @InitBinder protected void initBinder(WebDataBinder binder) {
 	 * binder.addValidators(new UsuarioValidator()); }
 	 */
@@ -45,35 +46,40 @@ public class UsuarioController {
 	// CRIAÇÃO DE CONTA
 	// ---------------------------------
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String novoUsuario(Model model, Authentication auth) {
-		if (auth != null)
+	public String criarContaForm(Model modelo, Authentication autenticacao) {
+		if (autenticacao != null) {
 			return "redirect:/meu-perfil";
-		model.addAttribute("criarContaModelo", new Usuario());
+		}
+		modelo.addAttribute("criarContaModelo", new Usuario());
 		return "criar-conta";
 	}
 
 	@Transactional
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String novo(@Valid Usuario usuario, BindingResult result, Model model) {
-		if (result.hasFieldErrors()) {
-			model.addAttribute("criarContaModelo", usuario);
+	public String criarContaValidar(@Valid @ModelAttribute("criarContaModelo") Usuario usuario,
+	                BindingResult resultado) {
+
+		if (resultado.hasErrors()) {
+			System.err.println(">> VALIDAÇÃO: Os campos contém dados inválidos!");
 			return "criar-conta";
 		}
-		service.cadastrarUsuario(usuario);
-		System.out.println(usuario);
-		return "redirect:/login";
+
+		if (service.cadastrarUsuario(usuario)) {
+			return "redirect:/login";
+		}
+
+		resultado.rejectValue(EMAIL, "", "Falha ao incluir usuário! Nome de usuário já existente!");
+		return "criar-conta";
 	}
 
 	// --------------------------------
 	// ALTERAÇÃO DE CONTA
 	// ---------------------------------
 	@RequestMapping(value = "/alterar-conta", method = RequestMethod.GET)
-	public String alterarContaForm(Model modelo) {
-		// Usuario usuario = new Usuario();
-
+	public String alterarContaForm(Model modelo, Authentication auth) {
 		try {
 			// TODO Recuperar da sessão o código do usuário correspondente
-			// /alterar-conta/{codigo} e @PathVariable
+			//Usuario usuario = (Usuario) auth.getPrincipal();
 			Usuario usuario = repositorio.obter(2);
 			modelo.addAttribute("alterarContaModelo", usuario);
 
@@ -89,11 +95,11 @@ public class UsuarioController {
 	@Transactional
 	@RequestMapping(value = "/alterar-conta", method = RequestMethod.POST)
 	public String alterarContaValidar(@Valid @ModelAttribute("alterarContaModelo") Usuario usuario,
-			BindingResult resultado, @RequestParam("imagem") MultipartFile arquivo) {
+	                BindingResult resultado, @RequestParam("imagemPerfil") MultipartFile arquivo) {
 
 		// Efetua a validação do formulário
 		if (resultado.hasErrors()) {
-			resultado.rejectValue("usuario.nomeUsuario", "", "Os campos contêm dados inválidos!");
+			resultado.rejectValue(NOME_USUARIO, "", "Os campos contêm dados inválidos!");
 
 			return "alterar-conta";
 		}
@@ -108,8 +114,7 @@ public class UsuarioController {
 
 		// Insere o usuário no BD
 		if (repositorio.alterar(usuario)) {
-			resultado.rejectValue("usuario.nomeUsuario", "",
-					usuario.getNome() + ", você alterou com sucesso seu perfil!");
+			resultado.rejectValue(NOME_USUARIO, "", usuario.getNome() + ", você alterou com sucesso seu perfil!");
 			return "alterar-conta";
 		}
 		return "alterar-conta";
@@ -128,7 +133,7 @@ public class UsuarioController {
 			// Recupera somente o nome do arquivo, descartando o caminho
 			// completo
 			nomeArquivo = nomeArquivoCompleto.substring(nomeArquivoCompleto.lastIndexOf("\\") + 1,
-					nomeArquivoCompleto.length());
+			                nomeArquivoCompleto.length());
 
 			// Recupera o caminho da aplicação
 			raiz = contexto.getRealPath("resources");
@@ -149,9 +154,9 @@ public class UsuarioController {
 			return nomeArquivo;
 
 		} catch (FileNotFoundException erro) {
-			resultado.rejectValue("usuario.imagem", "", "Arquivo não encontrado!");
+			resultado.rejectValue(IMAGEM, "", "Arquivo não encontrado!");
 		} catch (Exception erro) {
-			resultado.rejectValue("usuario.imagem", "", "Falha ao carregar imagem!");
+			resultado.rejectValue(IMAGEM, "", "Falha ao carregar imagem!");
 		}
 		return "";
 	}

@@ -20,51 +20,38 @@
 
 		<article id="container-login">
 			<sf:form modelAttribute="criarContaModelo">
-
-				<p>
-					<sf:input path="email" type="text" placeholder="Email"
-						required="required" />
-				</p>
 				<p>
 					<sf:errors path="email"></sf:errors>
 				</p>
 				<p>
-					<sf:input path="nome" type="text" placeholder="Nome completo"
-						required="required" />
+					<sf:input path="email" type="text" placeholder="Email" required="required" />
+				</p>				
+				<p>
+					<sf:input path="nome" type="text" placeholder="Nome completo" required="required" />
 				</p>
 				<p>
 					<sf:errors path="nome"></sf:errors>
 				</p>
-
 				<p>
-					<sf:input path="username" type="text" placeholder="Nome de usuário"
-						required="required" />
+					<sf:input path="username" type="text" placeholder="Nome de usuário" required="required" />
 				</p>
 				<p>
 					<sf:errors path="username"></sf:errors>
 				</p>
-
 				<p>
-					<sf:input path="password" type="password" placeholder="Senha"
-						required="required" />
+					<sf:input path="password" type="password" placeholder="Senha" required="required" />
 				</p>
 				<p>
 					<sf:errors path="password"></sf:errors>
 				</p>
-
 				<p>
 					<i>* O nome de usuário não poderá ser alterado mais tarde!</i>
 				</p>
-
 				<p>
 					<input type="submit" value="Criar conta" />
 				</p>
-
 			</sf:form>
-
 		</article>
-
 	</section>
-
 </body>
 </html>

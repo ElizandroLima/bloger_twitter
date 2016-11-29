@@ -30,7 +30,7 @@
 					</p>	
 					<c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>				
 					<p><input type="submit" value="Entrar"></p>
-					<p><a href="criar-conta"><input type="button" value="Inscreva-se"></a></p>
+					<p><a href="/Twitter"><input type="button" value="Inscreva-se"></a></p>
 				</form:form>				
 			</article> 
 		</section>  	 

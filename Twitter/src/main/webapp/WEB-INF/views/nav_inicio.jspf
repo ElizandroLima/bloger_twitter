@@ -11,11 +11,7 @@
 				<img class="menu-icone" src="./resources/css/imagens/icone_perfil.png" alt="Meu Perfil" />
 				<p class="menu-titulo">Meu Perfil</p>
 			</li>
-		</a>
-		<li>
-			<img class="menu-icone" src="./resources/css/imagens/icone_buscar.png" alt="Buscar" />
-			<p><input class="menu-input-buscar" type="text" placeholder="Buscar" /></p>
-		</li>
+		</a> 
 		<li>
 			<a href="alterar-conta"><img class="menu-icone" src="./resources/css/imagens/icone_dados.png" alt="Alterar Meu Perfil" title="Alterar Meu Perfil" /></a>
 		</li>
@@ -23,7 +19,12 @@
 			<a href="novo-tweet"><img class="menu-icone" src="./resources/css/imagens/icone_mensagem.png" alt="Novo Tweet" title="Novo Tweet" /></a>
 		</li>
 		<li>
-			<a href="/logout"><img class="menu-icone" src="./resources/css/imagens/icone_logout.png" alt="Encerrar Sessão" title="Encerrar Sessão" /></a>
+			<a href="logout"><img class="menu-icone" src="./resources/css/imagens/icone_logout.png" alt="Encerrar Sessão" title="Encerrar Sessão" /></a>
+		</li>
+		<li>
+			<form action="busca" method="GET">
+				<p><input type="text" class="menu-input-buscar" placeholder="Buscar" name="campoBusca" /></p>
+			</form>
 		</li>
 	</ul> 					
 </nav>	 

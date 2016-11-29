@@ -1,6 +1,7 @@
 package twitter.model;
 
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,12 +9,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.persistence.JoinColumn;
-import java.util.Set;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -23,17 +23,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Table(name = "usuario")
 public class Usuario implements UserDetails {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo;
 
 	@NotEmpty(message = "Nome de usuário não pode ser vazio!")
-	@Column(unique=true)
+	@Column(unique = true)
 	private String username;
 
 	@NotEmpty(message = "Nome não pode ser vazio!")
@@ -41,7 +38,6 @@ public class Usuario implements UserDetails {
 
 	@NotEmpty(message = "Email não pode ser vazio!")
 	@Email(message = "Deve estar no formato correto de email!")
-	@Column(unique=true)
 	private String email;
 
 	@NotEmpty(message = "Senha não pode ser vazia!")
@@ -54,9 +50,8 @@ public class Usuario implements UserDetails {
 
 	private String imagem;
 
-
 	public Usuario(int codigo, String username, String nome, String email, String password, Set<Perfil> papeis,
-			String imagem) {
+	                String imagem) {
 		super();
 		this.codigo = codigo;
 		this.username = username;
@@ -69,9 +64,8 @@ public class Usuario implements UserDetails {
 
 	public Usuario() {
 		super();
-		
-	}
 
+	}
 
 	public int getCodigo() {
 		return codigo;
@@ -127,9 +121,12 @@ public class Usuario implements UserDetails {
 		return papeis;
 	}
 
+	public void setPapeis(Set<Perfil> papeis) {
+		this.papeis = papeis;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
 		return papeis;
 	}
 
@@ -153,7 +150,6 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
@@ -161,5 +157,4 @@ public class Usuario implements UserDetails {
 	public String toString() {
 		return "User [codigo=" + codigo + ", username=" + username + ", password=" + password + "]";
 	}
-
 }

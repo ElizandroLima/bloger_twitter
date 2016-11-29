@@ -18,33 +18,33 @@
 			<article id="container-login">
 				<form:errors path="*" />
 				<form:form modelAttribute="alterarContaModelo" enctype="multipart/form-data"> 
-					<p><form:input path="usuario.codigo" type="hidden" /></p>
+					<p><form:input path="codigo" type="hidden" /></p>
 					
-					<p><form:errors path="usuario.nomeUsuario"></form:errors></p>
+					<p><form:errors path="username"></form:errors></p>
 					<p>
-						<form:label path="usuario.nomeUsuario" class="campo-form">Nome de usuário:</form:label>
-						<form:input path="usuario.nomeUsuario" type="text" readonly="true" />
+						<form:label path="username" class="campo-form">Nome de usuário:</form:label>
+						<form:input path="username" type="text" readonly="true" />
 					</p>
-					<p><form:errors path="usuario.nome"></form:errors></p>
+					<p><form:errors path="nome"></form:errors></p>
 					<p>
-						<form:label path="usuario.nome" class="campo-form">Nome completo:</form:label>
-						<form:input path="usuario.nome" type="text" required="required" />
+						<form:label path="nome" class="campo-form">Nome completo:</form:label>
+						<form:input path="nome" type="text" required="required" />
 					</p>
-					<p><form:errors path="usuario.email"></form:errors></p>
+					<p><form:errors path="email"></form:errors></p>
 					<p>
-						<form:label path="usuario.email" class="campo-form">Email:</form:label>
-						<form:input path="usuario.email" type="email" required="required" />
+						<form:label path="email" class="campo-form">Email:</form:label>
+						<form:input path="email" type="email" required="required" />
 					</p>
-					<p><form:errors path="usuario.senha"></form:errors></p>
+					<p><form:errors path="password"></form:errors></p>
 					<p>
-						<form:label path="usuario.senha" class="campo-form">Alterar senha:</form:label>
-						<form:input path="usuario.senha" type="password" required="required" />
+						<form:label path="password" class="campo-form">Alterar password:</form:label>
+						<form:input path="password" type="password" required="required" />
 					</p>
 					<p>
-						<label for="imagem" class="campo-form">Foto:</label>
-						<input name="imagem" id="imagem" type="file" accept="image/*" />
+						<label for="imagemPerfil" class="campo-form">Foto:</label>
+						<input name="imagemPerfil" id="imagemPerfil" type="file" accept="image/*" />
 					</p>					
-					<p><form:errors path="usuario.imagem"></form:errors></p>
+					<p><form:errors path="imagem"></form:errors></p>
 					
 					<p><input type="submit" value="Alterar conta"></p> 
 				</form:form>				

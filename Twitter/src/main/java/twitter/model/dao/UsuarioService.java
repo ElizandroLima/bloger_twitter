@@ -19,34 +19,33 @@ import twitter.model.repository.UsuarioServiceRepository;
 public class UsuarioService implements UserDetailsService, UsuarioServiceRepository {
 
 	@Autowired
-	private UsuarioRepository repo;
+	private UsuarioRepository repositorio;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario user;
+		Usuario usuario;
 
-		user = repo.buscarUsuarioPorUsername(username);
+		usuario = repositorio.buscarUsuarioPorUsername(username);
 
-		if (user == null)
+		if (usuario == null) {
 			throw new UsernameNotFoundException("Usuário não encontrado.");
-
-		return user;
+		}
+		return usuario;
 	}
 
 	@Override
 	@Transactional
-	public void cadastrarUsuario(Usuario usuario) {
-
-		BCryptPasswordEncoder encoder;
-		encoder = new BCryptPasswordEncoder();
-
-		System.out.println(usuario.getPassword());
-
+	public boolean cadastrarUsuario(Usuario usuario) {
 		String passwordCriptografado;
+		BCryptPasswordEncoder encoder;
+
+		encoder = new BCryptPasswordEncoder();
 		passwordCriptografado = encoder.encode(usuario.getPassword());
 		usuario.setPassword(passwordCriptografado);
 
-		repo.inserir(usuario);
+		if (repositorio.inserir(usuario)) {
+			return true;
+		}
+		return false;
 	}
-
 }

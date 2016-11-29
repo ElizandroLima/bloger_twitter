@@ -20,9 +20,8 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 	private EntityManager em;
 
 	@Override
-	public void inserir(Usuario usuario) {
-		// Consulta tipada para indicar que será retornado um objeto Usuário da
-		// consulta
+	public boolean inserir(Usuario usuario) {
+		// Consulta tipada para indicar que será retornado um objeto Usuário da consulta
 		TypedQuery<Usuario> consulta;
 
 		try {
@@ -30,13 +29,12 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 			consulta = em.createQuery("SELECT u FROM Usuario u WHERE u.username = :username", Usuario.class);
 			consulta.setParameter("username", usuario.getUsername());
 
-			// Se a consulta não retornar resultados, então insere o usuário no
-			// BD
-			if (consulta.getResultList().isEmpty()) {
+			// Se a consulta não retornar resultados, então insere o usuário no BD
+			if (consulta.getResultList()
+			            .isEmpty()) {
 				em.persist(usuario);
+				return true;
 			}
-			System.err.println(">> JPA: Este usuário já existe no sistema!");
-
 		} catch (IllegalArgumentException erro) {
 			System.err.println(">> JPA: Argumento de pesquisa inválido!\n" + erro);
 		} catch (Exception erro) {
@@ -44,6 +42,7 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 		} finally {
 			em.close();
 		}
+		return false;
 	}
 
 	@Override
@@ -130,7 +129,9 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 
 		Usuario usuario;
 		try {
-			usuario = em.createQuery(jql, Usuario.class).setParameter("username", username).getSingleResult();
+			usuario = em.createQuery(jql, Usuario.class)
+			            .setParameter("username", username)
+			            .getSingleResult();
 		} catch (NoResultException e) {
 			return null;
 		}
@@ -138,5 +139,16 @@ public class JPAUsuarioRepository implements UsuarioRepository {
 		System.out.println(usuario.getNome());
 		System.out.println(usuario.getUsername());
 		return usuario;
+	}
+
+	@Override
+	public List<Usuario> pesquisarUsuario(String campoBusca) {
+		TypedQuery<Usuario> consulta = em.createQuery("SELECT u FROM Usuario u WHERE nome LIKE " + campoBusca,
+		                Usuario.class);
+		//consulta.setParameter(campoBusca, Usuario.class);
+
+		List<Usuario> usuarios = consulta.getResultList();
+		List<Usuario> usuarios2 = usuarios;
+		return usuarios2;
 	}
 }

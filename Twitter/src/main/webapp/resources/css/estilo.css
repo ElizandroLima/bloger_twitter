@@ -159,6 +159,10 @@ nav#menu-principal ul a li:hover {
 	border-bottom: solid 3px #2883d9;
 }
 
+nav#menu-principal ul li form {
+	display: inline-block;  
+}
+
 nav#menu-principal p {
 	float: left;
 }
