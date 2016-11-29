@@ -47,9 +47,8 @@
 				<p>
 					<i>* O nome de usuário não poderá ser alterado mais tarde!</i>
 				</p>
-				<p>
-					<input type="submit" value="Criar conta" />
-				</p>
+				<p><input type="submit" value="Criar conta" /></p>
+				<p><a href="login"><input type="button" value="Efetuar login"></a></p>
 			</sf:form>
 		</article>
 	</section>
