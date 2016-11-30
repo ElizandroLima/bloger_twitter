@@ -50,6 +50,7 @@ public class Usuario implements UserDetails {
 
 	private String imagem;
 
+	//------------------------------------------------------
 	public Usuario(int codigo, String username, String nome, String email, String password, Set<Perfil> papeis,
 	                String imagem) {
 		super();
@@ -64,7 +65,6 @@ public class Usuario implements UserDetails {
 
 	public Usuario() {
 		super();
-
 	}
 
 	public int getCodigo() {

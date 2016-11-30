@@ -20,20 +20,9 @@ public class InicioController {
 	// --------------------------------
 	@RequestMapping(value = "/inicio", method = RequestMethod.GET)
 	public String inicio(Model modelo, Authentication auth) {
-		// TODO Pegar o código da sessão adicionado ao efetuar login
 		try {
-			//Usuario usuario = (Usuario) auth.getPrincipal();
-			Usuario usuario = repositorio.obter(2);
-			modelo.addAttribute("usuarioModelo", usuario);
-
-			/*
-			 * Mensagem mensagem = repositorio.obter(codigoSessao);
-			 * modelo.addAttribute("mensagemModelo", mensagem);
-			 */
-			/*
-			 * Seguidor seguidor = repositorio.obter(codigoSessao);
-			 * modelo.addAttribute("seguidorModelo", seguidor);
-			 */
+			Usuario usuario = (Usuario) auth.getPrincipal();
+			modelo.addAttribute("usuarioModelo", repositorio.obter(usuario.getCodigo()));
 
 		} catch (NullPointerException erro) {
 			System.err.println(">> USUÁRIO: Usuário não encontrado!");
@@ -48,21 +37,9 @@ public class InicioController {
 	// --------------------------------
 	@RequestMapping(value = "/meu-perfil", method = RequestMethod.GET)
 	public String meuPerfil(Model modelo, Authentication auth) {
-
-		// TODO Pegar o código da sessão adicionado ao efetuar login
 		try {
-			//Usuario usuario = (Usuario) auth.getPrincipal();
-			Usuario usuario = repositorio.obter(2);
-			modelo.addAttribute("usuarioModelo", usuario);
-
-			/*
-			 * Mensagem mensagem = repositorio.obter(codigoSessao);
-			 * modelo.addAttribute("mensagemModelo", mensagem);
-			 */
-			/*
-			 * Seguidor seguidor = repositorio.obter(codigoSessao);
-			 * modelo.addAttribute("seguidorModelo", seguidor);
-			 */
+			Usuario usuario = (Usuario) auth.getPrincipal();
+			modelo.addAttribute("usuarioModelo", repositorio.obter(usuario.getCodigo()));
 
 		} catch (NullPointerException erro) {
 			System.err.println(">> USUÁRIO: Usuário não encontrado!");
@@ -77,21 +54,11 @@ public class InicioController {
 	// --------------------------------
 	@RequestMapping(value = "/novo-tweet", method = RequestMethod.GET)
 	public String novoTweetForm(Model modelo) {
-
-		// TODO Modificar o UsuarioModelView para a classe Mensagem
-		// UsuarioModelView usuario = new UsuarioModelView();
-		// modelo.addAttribute("novoTweetModelo", usuario);
-
 		return "novo-tweet";
 	}
 
 	@RequestMapping(value = "/novo-tweet", method = RequestMethod.POST)
 	public String novoTweetValidar() {
-
-		// TODO Modificar o UsuarioModelView para a classe Mensagem
-		// UsuarioModelView usuario = new UsuarioModelView();
-		// modelo.addAttribute("novoTweetModelo", usuario);
-
 		return "novo-tweet";
 	}
 }

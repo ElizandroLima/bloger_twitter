@@ -78,10 +78,8 @@ public class UsuarioController {
 	@RequestMapping(value = "/alterar-conta", method = RequestMethod.GET)
 	public String alterarContaForm(Model modelo, Authentication auth) {
 		try {
-			// TODO Recuperar da sessão o código do usuário correspondente
-			//Usuario usuario = (Usuario) auth.getPrincipal();
-			Usuario usuario = repositorio.obter(2);
-			modelo.addAttribute("alterarContaModelo", usuario);
+			Usuario usuario = (Usuario) auth.getPrincipal();
+			modelo.addAttribute("alterarContaModelo", repositorio.obter(usuario.getCodigo()));
 
 		} catch (NullPointerException erro) {
 			System.err.println(">> USUÁRIO: Usuário não encontrado!");
