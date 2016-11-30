@@ -41,7 +41,7 @@
 								
 			<article id="mensagens-conteudo">
 				<header>					
-					<img class="usuario-imagem" src="./resources/uploads/${usuarioModelo.imagem}" alt="Foto do Perfil" />
+					<img class="usuario-imagem" src="./resources/uploads/imagem_perfil.png" alt="Foto do Perfil" />
 					<p>Carlos Alberto</p>
 				</header>
 				<div class="clear"></div>

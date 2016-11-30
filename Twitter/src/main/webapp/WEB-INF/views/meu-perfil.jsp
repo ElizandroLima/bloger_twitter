@@ -39,12 +39,12 @@
 			<section class="seguidores">
 				<p class="titulo">Seguindo</p> 
 				<div class="seguidores-info">
-					<img class="usuario-imagem" src="./resources/uploads/${usuarioModelo.imagem}" alt="Foto do Perfil" />
+					<img class="usuario-imagem" src="./resources/uploads/imagem_perfil.png" alt="Foto do Perfil" />
 					<p>Carlos Alberto</p>
 				</div>				
 				<div class="clear"></div>
 				<div class="seguidores-info">
-					<img class="usuario-imagem" src="./resources/uploads/${usuarioModelo.imagem}" alt="Foto do Perfil" />
+					<img class="usuario-imagem" src="./resources/uploads/imagem_perfil.png" alt="Foto do Perfil" />
 					<p>Carlos Alberto</p>
 				</div>			 
 			</section>			
@@ -54,7 +54,7 @@
 			<section class="seguidores">
 				<p class="titulo">Seguidores</p> 
 				<div class="seguidores-info">
-					<img class="usuario-imagem" src="./resources/uploads/${usuarioModelo.imagem}" alt="Foto do Perfil" />
+					<img class="usuario-imagem" src="./resources/uploads/imagem_perfil.png" alt="Foto do Perfil" />
 					<p>Ana Maria</p>
 				</div>				
 				<div class="clear"></div> 			 
@@ -66,7 +66,7 @@
 						
 			<article id="mensagens-conteudo">
 				<header>					
-					<img class="usuario-imagem" src="./resources/uploads/${usuarioModelo.imagem}" alt="Foto do Perfil" />
+					<img class="usuario-imagem" src="./resources/uploads/imagem_perfil.png" alt="Foto do Perfil" />
 					<p>Carlos Alberto</p>
 				</header>
 				<div class="clear"></div>
